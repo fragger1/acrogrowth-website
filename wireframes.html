@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AcroGrowth — Wireframes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F2F2F0;
+      --frame: #C8C8C4;
+      --frame-dark: #9A9A96;
+      --fill-light: #E2E2DE;
+      --fill-mid: #CACAC6;
+      --fill-dark: #2A2A28;
+      --fill-black: #1A1A18;
+      --text-label: #6A6A66;
+      --text-dark: #1A1A18;
+      --accent: #4A5EFF;
+      --dashed: 1.5px dashed #B0B0AB;
+      --solid: 1.5px solid #C8C8C4;
+      --solid-dark: 1.5px solid #2A2A28;
+      --radius: 0px;
+      --font: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font);
+      color: var(--text-dark);
+      padding: 48px 32px 120px;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto 64px;
+      padding-bottom: 24px;
+      border-bottom: var(--solid-dark);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-label);
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--fill-dark);
+      color: #fff;
+      padding: 4px 10px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Section wrapper ── */
+    .wf-section {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+    }
+
+    .section-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .section-tag .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--fill-dark);
+      color: #fff;
+      padding: 3px 8px;
+      letter-spacing: 0.06em;
+    }
+    .section-tag .name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+    }
+    .section-tag .desc {
+      font-size: 12px;
+      color: var(--text-label);
+      margin-left: auto;
+      font-family: var(--mono);
+    }
+
+    /* ── Wireframe frame ── */
+    .wf-frame {
+      border: var(--solid-dark);
+      background: #FAFAF8;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Annotation labels ── */
+    .ann {
+      position: absolute;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      background: rgba(74,94,255,0.07);
+      padding: 2px 6px;
+      border: 1px solid rgba(74,94,255,0.25);
+      z-index: 10;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ── Generic placeholder elements ── */
+    .ph-box {
+      background: var(--fill-light);
+      border: var(--solid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--frame-dark);
+      position: relative;
+    }
+    .ph-box::before, .ph-box::after {
+      content: '';
+      position: absolute;
+      background: var(--frame);
+    }
+    .ph-box.img::before {
+      width: 100%; height: 1.5px; top: 50%; transform: translateY(-50%) rotate(-8deg);
+    }
+    .ph-box.img::after {
+      width: 100%; height: 1.5px; top: 50%; transform: translateY(-50%) rotate(8deg);
+    }
+
+    .ph-line {
+      height: 10px;
+      background: var(--fill-mid);
+      border-radius: 2px;
+    }
+    .ph-line.sm { height: 8px; }
+    .ph-line.lg { height: 14px; }
+    .ph-line.xl { height: 22px; }
+    .ph-line.xxl { height: 36px; }
+
+    .ph-btn {
+      background: var(--fill-dark);
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #fff;
+      letter-spacing: 0.08em;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .ph-btn.outline {
+      background: transparent;
+      border: var(--solid-dark);
+      color: var(--text-dark);
+    }
+
+    .ph-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-label);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .divider-v {
+      width: 1.5px;
+      background: var(--frame);
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+    .divider-h {
+      height: 1.5px;
+      background: var(--frame);
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .divider-h.dark {
+      background: var(--fill-dark);
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 1 — NAVIGATION
+    ──────────────────────────────────────────── */
+    .nav-wf {
+      padding: 0;
+      height: 60px;
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1.5px solid var(--fill-dark);
+    }
+    .nav-wf .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 28px;
+      flex: 1;
+    }
+    .nav-wf .logo-icon {
+      width: 28px; height: 28px;
+      background: var(--fill-dark);
+      flex-shrink: 0;
+    }
+    .nav-wf .logo-text { width: 100px; height: 12px; background: var(--fill-dark); }
+    .nav-wf .nav-toolbar {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid var(--fill-dark);
+      margin: 11px 28px 11px 0;
+      height: 38px;
+    }
+    .nav-wf .nav-item {
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      border-right: 1.5px solid var(--fill-dark);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+      white-space: nowrap;
+    }
+    .nav-wf .nav-item.cta {
+      background: var(--fill-dark);
+      color: #fff;
+      border-right: none;
+      padding: 0 22px;
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 2 — HERO (Asymmetric)
+    ──────────────────────────────────────────── */
+    .hero-wf {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-wf .hero-body {
+      display: flex;
+      min-height: 480px;
+    }
+    .hero-wf .hero-left {
+      flex: 55;
+      padding: 64px 48px;
+      border-right: var(--solid);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+    .hero-wf .hero-right {
+      flex: 45;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: var(--fill-light);
+    }
+    .hero-wf .hero-stat-box {
+      width: 100%;
+      border: 2px solid var(--fill-dark);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #fff;
+    }
+    .hero-wf .headline-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-wf .ticker-strip {
+      height: 42px;
+      border-top: var(--solid);
+      background: var(--fill-light);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+      padding: 0 28px;
+    }
+    .ticker-items {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .ticker-chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--text-label);
+      white-space: nowrap;
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 3 — METRICS BAR
+    ──────────────────────────────────────────── */
+    .metrics-wf {
+      background: var(--fill-dark);
+      display: flex;
+      align-items: stretch;
+      height: 100px;
+    }
+    .metric-cell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 24px;
+      border-right: 1.5px solid rgba(255,255,255,0.15);
+    }
+    .metric-cell:last-child { border-right: none; }
+    .metric-num { width: 70%; height: 28px; background: rgba(255,255,255,0.22); }
+    .metric-lbl { width: 55%; height: 9px; background: rgba(255,255,255,0.12); }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 4 — PROBLEM
+    ──────────────────────────────────────────── */
+    .problem-wf {
+      display: flex;
+      min-height: 520px;
+    }
+    .problem-left {
+      flex: 40;
+      padding: 60px 48px;
+      border-right: var(--solid);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #fff;
+    }
+    .problem-right {
+      flex: 60;
+      display: flex;
+      flex-direction: column;
+    }
+    .problem-card-wf {
+      flex: 1;
+      padding: 28px 32px;
+      border-bottom: var(--solid);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: #fff;
+      transition: background 0.15s;
+    }
+    .problem-card-wf:last-child { border-bottom: none; }
+    .problem-card-wf .ghost-num {
+      font-family: var(--mono);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--fill-mid);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 48px;
+    }
+    .problem-card-wf .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 5 — HOW IT WORKS
+    ──────────────────────────────────────────── */
+    .how-wf {
+      background: var(--fill-dark);
+    }
+    .how-wf .how-header {
+      padding: 56px 48px 40px;
+      border-bottom: 1.5px solid rgba(255,255,255,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .how-wf .steps-row {
+      display: flex;
+      align-items: stretch;
+    }
+    .how-step {
+      flex: 1;
+      padding: 40px 36px;
+      border-right: 1.5px solid rgba(255,255,255,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .how-step:last-child { border-right: none; }
+    .how-step .ghost-num {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-family: var(--mono);
+      font-size: 56px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+    }
+    .step-icon-box {
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+    .ph-line-wht { height: 10px; background: rgba(255,255,255,0.2); border-radius: 2px; }
+    .ph-line-wht.lg { height: 14px; }
+    .ph-line-wht.sm { height: 8px; }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 6 — OFFER
+    ──────────────────────────────────────────── */
+    .offer-wf {
+      display: flex;
+    }
+    .offer-main-wf {
+      flex: 1;
+      padding: 52px 48px;
+      border-right: var(--solid);
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .offer-sidebar-wf {
+      width: 360px;
+      flex-shrink: 0;
+      padding: 52px 40px;
+      background: var(--fill-dark);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .offer-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .check-box {
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--fill-mid);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+      background: var(--fill-light);
+    }
+    .offer-item-body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 7 — FAQ
+    ──────────────────────────────────────────── */
+    .faq-wf { padding: 64px 48px; background: #fff; }
+    .faq-wf .faq-header { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+    .faq-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      border-top: var(--solid);
+      gap: 16px;
+    }
+    .faq-row:last-child { border-bottom: var(--solid); }
+    .faq-row-body { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+    .plus-box {
+      width: 30px; height: 30px;
+      border: 1.5px solid var(--fill-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 16px; color: var(--text-label);
+      flex-shrink: 0;
+    }
+    .faq-row.open .plus-box { background: var(--fill-dark); color: #fff; }
+    .faq-answer-ph {
+      padding: 0 0 20px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 8 — BOOK A CALL
+    ──────────────────────────────────────────── */
+    .book-wf {
+      display: flex;
+      min-height: 560px;
+    }
+    .book-left-wf {
+      flex: 35;
+      padding: 64px 48px;
+      border-right: var(--solid);
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: flex-start;
+    }
+    .book-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .meta-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .meta-icon { width: 14px; height: 14px; background: var(--fill-mid); flex-shrink: 0; }
+    .book-right-wf {
+      flex: 65;
+      padding: 40px;
+      background: var(--fill-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .calendly-ph {
+      flex: 1;
+      border: 1.5px solid var(--fill-dark);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+      position: relative;
+    }
+    .calendly-ph .inner-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--frame-dark);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* ────────────────────────────────────────────
+       COMPONENT 9 — FOOTER
+    ──────────────────────────────────────────── */
+    .footer-wf {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      border-top: 1.5px solid var(--fill-dark);
+      background: #fff;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-wf .footer-logo { width: 100px; height: 14px; background: var(--fill-dark); }
+    .footer-wf .footer-copy { width: 160px; height: 9px; background: var(--fill-mid); }
+    .footer-wf .footer-links { display: flex; gap: 28px; }
+    .footer-wf .footer-link { width: 48px; height: 9px; background: var(--fill-mid); }
+
+    /* ── Spacing helpers ── */
+    .gap-4  { height: 4px; }
+    .gap-8  { height: 8px; }
+    .gap-12 { height: 12px; }
+    .gap-20 { height: 20px; }
+    .gap-28 { height: 28px; }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <p style="font-size:11px;color:var(--text-label);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;font-family:var(--mono)">AcroGrowth · Landing Page</p>
+      <h1>Wireframes — All Components</h1>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span class="badge">9 COMPONENTS</span>
+      <span class="badge" style="background:transparent;color:var(--text-label);border:1.5px solid var(--frame)">DESKTOP · 1200PX</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 1 — NAVIGATION
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">01</span>
+      <span class="name">Navigation Bar</span>
+      <span class="desc">Fixed · 60px height · Full width</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px">Logo icon + wordmark</span>
+      <span class="ann" style="top:8px;right:8px">Segmented toolbar: [Process][Offer][FAQ][Book a Call▪]</span>
+      <div class="nav-wf">
+        <div class="logo-area">
+          <div class="logo-icon"></div>
+          <div class="logo-text"></div>
+        </div>
+        <div class="nav-toolbar">
+          <div class="nav-item">Process</div>
+          <div class="nav-item">Offer</div>
+          <div class="nav-item">FAQ</div>
+          <div class="nav-item cta">Book a Call</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Stays fixed on scroll</span>
+      <span>→ Each link hover: invert black/white</span>
+      <span>→ "Book a Call" always filled black</span>
+      <span>→ Mobile: links hidden, CTA stays</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 2 — HERO
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">02</span>
+      <span class="name">Hero — Asymmetric Split</span>
+      <span class="desc">Full viewport height · Fade-in animations</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px">55% — Headline + sub + CTA</span>
+      <span class="ann" style="top:8px;right:8px">45% — Stat visual block</span>
+      <span class="ann" style="bottom:0;left:8px">Ticker strip — scrolling keywords</span>
+      <div class="hero-wf">
+        <div class="hero-body">
+          <!-- Left -->
+          <div class="hero-left">
+            <div>
+              <div class="ph-label">Eyebrow label</div>
+              <div class="ph-line sm" style="width:55%"></div>
+            </div>
+            <div class="headline-block">
+              <div class="ph-line xxl" style="width:90%"></div>
+              <div class="ph-line xxl" style="width:75%"></div>
+              <div class="ph-line xxl" style="width:55%"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="ph-line" style="width:95%"></div>
+              <div class="ph-line" style="width:88%"></div>
+              <div class="ph-line" style="width:60%"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:8px">
+              <div class="ph-btn">Book a Call</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div class="ph-line sm" style="width:120px"></div>
+                <div class="ph-line sm" style="width:90px"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right -->
+          <div class="hero-right">
+            <div style="width:100%">
+              <div class="ph-label" style="text-align:center;margin-bottom:12px">Stat visual / proof element</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="ph-line xxl" style="width:60%;background:var(--fill-dark)"></div>
+              <div class="ph-line xl" style="width:80%"></div>
+              <div class="gap-8"></div>
+              <div class="ph-line sm" style="width:50%"></div>
+              <div class="ph-line sm" style="width:40%"></div>
+              <div class="ph-line sm" style="width:55%"></div>
+            </div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);text-align:center">"8 meetings/mo" · bold bordered box</div>
+          </div>
+        </div>
+
+        <!-- Ticker -->
+        <div class="hero-wf" style="border-top:var(--solid)">
+          <div class="hero-ticker-row" style="height:42px;display:flex;align-items:center;padding:0 28px;gap:32px;background:var(--fill-light);overflow:hidden">
+            <div class="ticker-items">
+              <span class="ticker-chip">LinkedIn Outbound —</span>
+              <span class="ticker-chip">Sales Navigator —</span>
+              <span class="ticker-chip">ICP Lead Lists —</span>
+              <span class="ticker-chip">Content Creation —</span>
+              <span class="ticker-chip">8 Meetings / Month —</span>
+              <span class="ticker-chip">Done For You —</span>
+              <span class="ticker-chip">InMail Sequences —</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Left col fades up on load</span>
+      <span>→ Right stat box: thick 2px border, no fill</span>
+      <span>→ Ticker auto-scrolls infinitely</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 3 — METRICS BAR
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">03</span>
+      <span class="name">Social Proof / Metrics Bar</span>
+      <span class="desc">Full width · Black background · 4 stat cells</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px;background:rgba(255,255,255,0.85)">4 cells: large number + label, divided by vertical rules</span>
+      <div class="metrics-wf">
+        <div class="metric-cell">
+          <div class="metric-num"></div>
+          <div class="metric-lbl"></div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.35)">e.g. "8 Meetings/Mo"</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num"></div>
+          <div class="metric-lbl"></div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.35)">e.g. "2-Week Pilot"</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num"></div>
+          <div class="metric-lbl"></div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.35)">e.g. "100% Refund"</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num"></div>
+          <div class="metric-lbl"></div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.35)">e.g. "LinkedIn-Only"</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Black BG, white text</span>
+      <span>→ Large Bebas Neue numbers (64px)</span>
+      <span>→ Small uppercase labels beneath</span>
+      <span>→ Vertical rules between cells</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 4 — PROBLEM
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">04</span>
+      <span class="name">Problem Section</span>
+      <span class="desc">Sticky left col + 3 stacked cards right</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px">Sticky — stays fixed while scrolling cards</span>
+      <span class="ann" style="top:8px;right:8px">Hover: full card inverts → black bg, white text</span>
+      <div class="problem-wf">
+        <!-- Left sticky -->
+        <div class="problem-left">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div class="ph-line sm" style="width:70%;background:var(--fill-mid)"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="ph-line xl" style="width:90%"></div>
+            <div class="ph-line xl" style="width:80%"></div>
+            <div class="ph-line xl" style="width:60%"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+            <div class="ph-line" style="width:100%"></div>
+            <div class="ph-line" style="width:95%"></div>
+            <div class="ph-line" style="width:70%"></div>
+          </div>
+          <div style="margin-top:20px;font-family:var(--mono);font-size:10px;color:var(--text-label);border:var(--dashed);padding:10px">Section label + headline + 1-line framing copy</div>
+        </div>
+
+        <!-- Right cards -->
+        <div class="problem-right">
+          <div class="problem-card-wf">
+            <div class="ghost-num">01</div>
+            <div class="card-body">
+              <div class="ph-line lg" style="width:65%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line sm" style="width:100%"></div>
+              <div class="ph-line sm" style="width:90%"></div>
+              <div class="ph-line sm" style="width:75%"></div>
+            </div>
+          </div>
+          <div class="problem-card-wf">
+            <div class="ghost-num">02</div>
+            <div class="card-body">
+              <div class="ph-line lg" style="width:70%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line sm" style="width:100%"></div>
+              <div class="ph-line sm" style="width:85%"></div>
+              <div class="ph-line sm" style="width:60%"></div>
+            </div>
+          </div>
+          <div class="problem-card-wf">
+            <div class="ghost-num">03</div>
+            <div class="card-body">
+              <div class="ph-line lg" style="width:60%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line sm" style="width:95%"></div>
+              <div class="ph-line sm" style="width:80%"></div>
+              <div class="ph-line sm" style="width:65%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Ghost numbers: very light gray</span>
+      <span>→ Card hover: full black background invert</span>
+      <span>→ Scroll reveal on each card</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 5 — HOW IT WORKS
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">05</span>
+      <span class="name">How It Works</span>
+      <span class="desc">Black BG · 3-column grid · Step cards</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px;background:rgba(255,255,255,0.85)">Full black section</span>
+      <span class="ann" style="top:8px;right:8px;background:rgba(255,255,255,0.85)">Ghost step numbers: top-right of each card</span>
+      <div class="how-wf">
+        <div class="how-header">
+          <div class="ph-line-wht sm" style="width:18%"></div>
+          <div class="gap-4"></div>
+          <div class="ph-line-wht lg" style="width:55%"></div>
+          <div class="ph-line-wht lg" style="width:42%"></div>
+        </div>
+        <div class="steps-row">
+          <div class="how-step">
+            <span class="ghost-num">01</span>
+            <div class="step-icon-box"></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="ph-line-wht lg" style="width:75%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line-wht sm" style="width:100%"></div>
+              <div class="ph-line-wht sm" style="width:90%"></div>
+              <div class="ph-line-wht sm" style="width:65%"></div>
+            </div>
+          </div>
+          <div class="how-step">
+            <span class="ghost-num">02</span>
+            <div class="step-icon-box"></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="ph-line-wht lg" style="width:80%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line-wht sm" style="width:100%"></div>
+              <div class="ph-line-wht sm" style="width:85%"></div>
+              <div class="ph-line-wht sm" style="width:70%"></div>
+            </div>
+          </div>
+          <div class="how-step">
+            <span class="ghost-num">03</span>
+            <div class="step-icon-box"></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="ph-line-wht lg" style="width:70%"></div>
+              <div class="gap-4"></div>
+              <div class="ph-line-wht sm" style="width:100%"></div>
+              <div class="ph-line-wht sm" style="width:80%"></div>
+              <div class="ph-line-wht sm" style="width:55%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ White border separates columns</span>
+      <span>→ Small icon box (bordered square) per step</span>
+      <span>→ Ghost numbers: barely-visible white</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 6 — OFFER
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">06</span>
+      <span class="name">Offer — Two-Panel</span>
+      <span class="desc">White left (checklist) + Black right (pilot + guarantee)</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px">Checklist: icon box + title + description per item</span>
+      <span class="ann" style="top:8px;right:8px;background:rgba(255,255,255,0.85)">"Free Pilot" badge · CTA · Guarantee block</span>
+      <div style="padding:48px;border-bottom:var(--solid);background:#fff">
+        <div style="display:flex;gap:12px;margin-bottom:32px">
+          <div class="ph-line sm" style="width:14%;background:var(--fill-mid)"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:28px">
+          <div class="ph-line xl" style="width:55%"></div>
+          <div class="ph-line xl" style="width:35%"></div>
+        </div>
+      </div>
+      <div class="offer-wf">
+        <div class="offer-main-wf">
+          <div class="ph-line lg" style="width:40%"></div>
+          <div class="gap-8"></div>
+          <div class="offer-item">
+            <div class="check-box">✓</div>
+            <div class="offer-item-body">
+              <div class="ph-line" style="width:55%"></div>
+              <div class="ph-line sm" style="width:85%"></div>
+            </div>
+          </div>
+          <div class="offer-item">
+            <div class="check-box">✓</div>
+            <div class="offer-item-body">
+              <div class="ph-line" style="width:60%"></div>
+              <div class="ph-line sm" style="width:90%"></div>
+            </div>
+          </div>
+          <div class="offer-item">
+            <div class="check-box">✓</div>
+            <div class="offer-item-body">
+              <div class="ph-line" style="width:50%"></div>
+              <div class="ph-line sm" style="width:80%"></div>
+            </div>
+          </div>
+          <div class="offer-item">
+            <div class="check-box">✓</div>
+            <div class="offer-item-body">
+              <div class="ph-line" style="width:65%"></div>
+              <div class="ph-line sm" style="width:75%"></div>
+            </div>
+          </div>
+          <div class="offer-item">
+            <div class="check-box">✓</div>
+            <div class="offer-item-body">
+              <div class="ph-line" style="width:45%"></div>
+              <div class="ph-line sm" style="width:70%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="offer-sidebar-wf">
+          <!-- Badge -->
+          <div style="width:140px;height:22px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
+            <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.6)">FREE 2-WEEK PILOT</div>
+          </div>
+          <!-- Heading -->
+          <div class="ph-line-wht lg" style="width:80%"></div>
+          <!-- Body -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="ph-line-wht sm" style="width:100%"></div>
+            <div class="ph-line-wht sm" style="width:95%"></div>
+            <div class="ph-line-wht sm" style="width:80%"></div>
+          </div>
+          <!-- CTA -->
+          <div style="height:40px;border:1.5px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;margin-top:8px">
+            <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.7)">Book a Call →</div>
+          </div>
+          <!-- Divider -->
+          <div style="height:1.5px;background:rgba(255,255,255,0.15);margin-top:8px"></div>
+          <!-- Guarantee -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <div class="ph-line-wht lg" style="width:60%"></div>
+            <div class="ph-line-wht sm" style="width:100%"></div>
+            <div class="ph-line-wht sm" style="width:90%"></div>
+            <div class="ph-line-wht sm" style="width:70%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Left: white bg, bordered checkboxes</span>
+      <span>→ Right: black bg, white text, pilot badge + guarantee rule</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 7 — FAQ
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">07</span>
+      <span class="name">FAQ — Accordion</span>
+      <span class="desc">5 questions · Border-divided rows · Animated open/close</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;right:8px">First item shown open for reference</span>
+      <div class="faq-wf">
+        <div class="faq-header">
+          <div class="ph-line sm" style="width:15%"></div>
+          <div class="ph-line xl" style="width:50%"></div>
+          <div class="ph-line xl" style="width:38%"></div>
+        </div>
+        <div style="max-width:760px">
+          <!-- Open item -->
+          <div class="faq-row open">
+            <div class="faq-row-body">
+              <div class="ph-line lg" style="width:65%"></div>
+              <div class="faq-answer-ph">
+                <div class="gap-4"></div>
+                <div class="ph-line sm" style="width:100%"></div>
+                <div class="ph-line sm" style="width:95%"></div>
+                <div class="ph-line sm" style="width:75%"></div>
+              </div>
+            </div>
+            <div class="plus-box">×</div>
+          </div>
+          <!-- Closed items -->
+          <div class="faq-row">
+            <div class="faq-row-body"><div class="ph-line lg" style="width:58%"></div></div>
+            <div class="plus-box">+</div>
+          </div>
+          <div class="faq-row">
+            <div class="faq-row-body"><div class="ph-line lg" style="width:70%"></div></div>
+            <div class="plus-box">+</div>
+          </div>
+          <div class="faq-row">
+            <div class="faq-row-body"><div class="ph-line lg" style="width:62%"></div></div>
+            <div class="plus-box">+</div>
+          </div>
+          <div class="faq-row">
+            <div class="faq-row-body"><div class="ph-line lg" style="width:68%"></div></div>
+            <div class="plus-box">+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Border top per row, border bottom on last</span>
+      <span>→ + icon rotates 45° when open (becomes ×)</span>
+      <span>→ Answer fades in with max-height transition</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 8 — BOOK A CALL
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">08</span>
+      <span class="name">Book a Call — Calendly Embed</span>
+      <span class="desc">35/65 split · Left sticky context · Right Calendly widget</span>
+    </div>
+    <div class="wf-frame">
+      <span class="ann" style="top:8px;left:8px">Sticky — stays while calendar scrolls</span>
+      <span class="ann" style="top:8px;right:8px">Calendly inline widget · 700px min-height</span>
+      <div class="book-wf">
+        <div class="book-left-wf">
+          <div class="ph-line sm" style="width:50%"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <div class="ph-line xl" style="width:90%"></div>
+            <div class="ph-line xl" style="width:70%"></div>
+            <div class="ph-line xl" style="width:50%"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+            <div class="ph-line" style="width:100%"></div>
+            <div class="ph-line" style="width:85%"></div>
+          </div>
+          <div class="ph-btn" style="margin-top:8px;width:fit-content">Book a Call</div>
+          <div class="book-meta-list">
+            <div class="meta-row">
+              <div class="meta-icon"></div>
+              <div class="ph-line sm" style="width:80px"></div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon"></div>
+              <div class="ph-line sm" style="width:100px"></div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon"></div>
+              <div class="ph-line sm" style="width:90px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="book-right-wf">
+          <div class="calendly-ph">
+            <div class="calendly-ph" style="position:absolute;inset:0;background:var(--fill-light);border:none">
+              <!-- Cross pattern -->
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.3" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="0" x2="100%" y2="100%" stroke="#9A9A96" stroke-width="1.5"/>
+                <line x1="100%" y1="0" x2="0" y2="100%" stroke="#9A9A96" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="inner-label" style="z-index:2;position:relative">
+              Calendly Inline Widget<br/>
+              <span style="opacity:0.6">calendly.com/leomanhal/new-meeting</span><br/>
+              <span style="opacity:0.5;font-size:9px">min-width: 320px · height: 700px</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Left col sticky (top: 100px)</span>
+      <span>→ 3 meta items: clock / video / shield icons</span>
+      <span>→ Calendly bordered box, full height</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       COMPONENT 9 — FOOTER
+  ══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="section-tag">
+      <span class="num">09</span>
+      <span class="name">Footer</span>
+      <span class="desc">Single row · Logo · Copyright · Nav links</span>
+    </div>
+    <div class="wf-frame">
+      <div class="footer-wf">
+        <div class="footer-logo"></div>
+        <div class="footer-copy"></div>
+        <div class="footer-links">
+          <div class="footer-link"></div>
+          <div class="footer-link"></div>
+          <div class="footer-link"></div>
+          <div class="footer-link"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-label);display:flex;gap:24px">
+      <span>→ Border top only</span>
+      <span>→ Logo left · Copyright center · Links right</span>
+    </div>
+  </div>
+
+
+  <!-- ── Page flow summary ── -->
+  <div style="max-width:1200px;margin:0 auto;border:var(--solid-dark);padding:32px 40px;background:#fff">
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-label);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px">Page Flow (top → bottom)</p>
+    <div style="display:flex;align-items:stretch;gap:0;border:var(--solid)">
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">01</div>
+        <div style="font-size:12px;font-weight:600">Nav</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">02</div>
+        <div style="font-size:12px;font-weight:600">Hero</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center;background:var(--fill-dark);color:#fff">
+        <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:6px">03</div>
+        <div style="font-size:12px;font-weight:600">Metrics</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">04</div>
+        <div style="font-size:12px;font-weight:600">Problem</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center;background:var(--fill-dark);color:#fff">
+        <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:6px">05</div>
+        <div style="font-size:12px;font-weight:600">Process</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">06</div>
+        <div style="font-size:12px;font-weight:600">Offer</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">07</div>
+        <div style="font-size:12px;font-weight:600">FAQ</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;border-right:var(--solid);text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">08</div>
+        <div style="font-size:12px;font-weight:600">Book</div>
+      </div>
+      <div style="flex:1;padding:16px 12px;text-align:center">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-label);margin-bottom:6px">09</div>
+        <div style="font-size:12px;font-weight:600">Footer</div>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--text-label)">Dark cells = black background sections · Alternates create visual rhythm</p>
+  </div>
+
+</body>
+</html>
