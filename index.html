@@ -1,710 +1,556 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AcroGrowth — 8 Qualified Meetings / Month for B2B Tech Founders</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<!DOCTYPE html><html lang="en" style="--bg: #f8f7f4;"><head>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AcroGrowth — 10 Qualified Meetings / Month for B2B Leaders</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- Vercel Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-
-  <!-- Calendly -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:wght@400;500;600&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <style>
-    /* =========================================
-       TOKENS
-    ========================================= */
     :root {
-      --black:        #000000;
-      --white:        #FFFFFF;
-      --border-dark:  2px solid #000000;
-      --border-light: 2px solid #FFFFFF;
+      --bg:       #f5f4ef;
+      --ink:      #111110;
+      --ink-dim:  rgba(17,17,16,0.5);
+      --ink-faint:rgba(17,17,16,0.1);
+      --dark:     #191917;
+      --display:  'Instrument Serif', Georgia, serif;
+      --body:     'DM Sans', sans-serif;
+      --mono:     'Space Mono', monospace;
     }
 
-    /* =========================================
-       RESET
-    ========================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      border-radius: 0 !important;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Instrument Sans', sans-serif;
-      background: var(--white);
-      color: var(--black);
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
-    /* =========================================
-       KEYFRAMES
-    ========================================= */
+    /* ── Keyframes ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes ticker {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
 
-    /* =========================================
-       HERO LOAD ANIMATIONS
-    ========================================= */
-    .fade-in {
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-    }
-    .fade-in-1 { animation-delay: 0.10s; }
-    .fade-in-2 { animation-delay: 0.25s; }
-    .fade-in-3 { animation-delay: 0.35s; }
-    .fade-in-4 { animation-delay: 0.50s; }
+    /* ── Hero load ── */
+    .fi { opacity: 0; animation: fadeUp 1s cubic-bezier(.16,1,.3,1) forwards; }
+    .fi-1 { animation-delay: .06s; }
+    .fi-2 { animation-delay: .18s; }
+    .fi-3 { animation-delay: .34s; }
+    .fi-4 { animation-delay: .50s; }
+    .fi-5 { animation-delay: .65s; }
 
-    /* =========================================
-       SCROLL REVEAL
-    ========================================= */
+    /* ── Scroll reveal ── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* =========================================
-       SHARED UTILITIES
-    ========================================= */
-    .inner {
-      max-width: 1140px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    /* ── Shared ── */
+    .inner { max-width: 1160px; margin: 0 auto; width: 100%; }
 
-    .section-label {
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: inherit;
+      gap: 10px;
       margin-bottom: 20px;
     }
-    .section-label::before {
+    .eyebrow::before {
       content: '';
       display: inline-block;
-      width: 32px;
-      height: 2px;
+      width: 18px;
+      height: 1px;
       background: currentColor;
-      flex-shrink: 0;
     }
 
-    .section-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(36px, 4.5vw, 60px);
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      line-height: 1;
+    .section-hed {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(34px, 3.8vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-bottom: 52px;
       color: inherit;
-      margin-bottom: 56px;
     }
+    .it { font-style: italic; }
 
-    /* =========================================
-       1. NAV
-    ========================================= */
+    /* ── NAV ── */
     nav#main-nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       height: 60px;
-      background: var(--white);
-      border-bottom: var(--border-dark);
+      background: var(--bg);
+      border-bottom: 1px solid var(--ink-faint);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
+      padding: 0 40px;
     }
-
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
     }
-    .nav-logo img { height: 28px; width: auto; }
-    .nav-logo-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      letter-spacing: 0.04em;
-      color: var(--black);
+    .nav-logo img {
+      height: 30px;
+      width: auto;
+      mix-blend-mode: multiply;
     }
-
-    .nav-toolbar {
-      display: flex;
-      align-items: stretch;
-      height: 38px;
-      border: 2px solid var(--black);
+    .nav-logo-name {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: .02em;
+      color: var(--ink);
     }
-
-    .nav-cell {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      font-family: 'Instrument Sans', sans-serif;
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      font-family: var(--body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 8px 16px;
+      opacity: .42;
+      transition: opacity .2s;
+    }
+    .nav-link:hover { opacity: .9; }
+    .nav-cta {
+      font-family: var(--body);
       font-weight: 600;
       font-size: 11px;
-      letter-spacing: 0.13em;
+      letter-spacing: .1em;
       text-transform: uppercase;
+      color: var(--bg);
+      background: var(--ink);
       text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease;
+      padding: 10px 22px;
+      margin-left: 10px;
+      transition: opacity .2s;
     }
+    .nav-cta:hover { opacity: .75; }
 
-    .nav-link {
-      padding: 0 18px;
-      background: var(--white);
-      color: var(--black);
-      border-right: 2px solid var(--black);
-    }
-    .nav-link:hover {
-      background-color: var(--black);
-      color: var(--white);
-    }
-
-    .nav-cta {
-      padding: 0 22px;
-      background: var(--black);
-      color: var(--white);
-    }
-    .nav-cta:hover {
-      background-color: var(--white);
-      color: var(--black);
-    }
-
-    /* =========================================
-       2. HERO
-    ========================================= */
+    /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      background: var(--white);
-      border-bottom: var(--border-dark);
-      padding: 140px 40px 80px;
+      background: var(--bg);
+      padding: 140px 40px 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
+      border-bottom: 1px solid var(--ink-faint);
     }
 
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--black);
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px;
-      height: 2px;
-      background: var(--black);
-    }
-
-    .hero-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(80px, 11vw, 160px);
-      line-height: 0.92;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      color: var(--black);
-      margin-bottom: 36px;
-      max-width: 100%;
-    }
-
-    .hero-rule {
-      border: none;
-      border-top: 2px solid var(--black);
-      margin-bottom: 36px;
-    }
-
-    .hero-two-col {
-      display: grid;
-      grid-template-columns: 60fr 40fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .hero-subheadline {
-      font-family: 'Instrument Sans', sans-serif;
+    .hero-hed {
+      font-family: var(--display);
       font-weight: 400;
-      font-size: 18px;
-      line-height: 1.65;
-      color: #111;
-      max-width: 520px;
-      margin-bottom: 36px;
+      font-size: clamp(70px, 11.5vw, 168px);
+      line-height: .92;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin-bottom: 56px;
+      max-width: 1160px;
     }
-
-    .btn-primary {
+    .hero-hed .num {
       display: inline-block;
-      background: var(--black);
-      color: var(--white);
-      border: 2px solid var(--black);
-      padding: 16px 40px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease;
-      margin-bottom: 20px;
-    }
-    .btn-primary:hover {
-      background-color: var(--white);
-      color: var(--black);
+      font-size: 1.1em;
+      line-height: .88;
     }
 
-    .hero-guarantee {
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--ink-faint);
+      max-width: 1160px;
+    }
+    .hero-subline {
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
+      opacity: .58;
+      max-width: 420px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 14px 32px;
+      font-family: var(--body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .72; }
+
+    .guarantee-line {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--black);
-    }
-    .hero-guarantee i { font-size: 14px; }
-
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-left: 48px;
-      border-left: 2px solid var(--black);
-    }
-
-    .proof-tag {
-      display: inline-block;
-      border: 2px solid var(--black);
-      padding: 8px 16px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--black);
-      width: fit-content;
+      color: var(--ink);
+      opacity: .35;
     }
 
     /* Ticker */
-    .ticker-strip {
+    .ticker {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      border-top: 2px solid var(--black);
-      padding: 14px 0;
+      border-top: 1px solid var(--ink-faint);
+      padding: 11px 0;
       overflow: hidden;
     }
     .ticker-track {
       display: flex;
-      gap: 80px;
+      gap: 56px;
       white-space: nowrap;
-      animation: ticker 20s linear infinite;
+      animation: ticker 32s linear infinite;
     }
     .ticker-item {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 0.14em;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: .22em;
       text-transform: uppercase;
+      color: var(--ink);
+      opacity: .22;
       flex-shrink: 0;
     }
-    .ticker-item::after {
-      content: '—';
-      opacity: 0.35;
-      margin-left: 16px;
-    }
+    .ticker-item::after { content: ' ·'; margin-left: 10px; }
 
-    /* =========================================
-       3. VSL PLACEHOLDER
-    ========================================= */
+    /* ── VSL ── */
     #vsl {
-      background: var(--white);
-      border-bottom: var(--border-dark);
-      padding: 48px 40px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--ink-faint);
+      padding: 56px 40px;
     }
     .vsl-box {
-      border: 2px solid var(--black);
       width: 100%;
-      height: 360px;
+      height: 380px;
+      border: 1px solid var(--ink-faint);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
     }
-    .vsl-play-icon {
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--black);
+    .vsl-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 24px,
+        rgba(17,17,16,.025) 24px, rgba(17,17,16,.025) 25px
+      );
+    }
+    .vsl-play {
+      width: 52px; height: 52px;
+      border: 1px solid var(--ink-faint);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      color: var(--black);
+      color: var(--ink);
+      font-size: 13px;
+      padding-left: 3px;
+      position: relative; z-index: 1;
     }
-    .vsl-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--black);
-    }
-    .vsl-subtext {
-      font-family: 'Instrument Sans', sans-serif;
+    .vsl-title {
+      font-family: var(--display);
       font-weight: 400;
-      font-size: 14px;
-      color: #111;
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      position: relative; z-index: 1;
+    }
+    .vsl-sub {
+      font-family: var(--body);
+      font-size: 12px;
+      color: var(--ink);
+      opacity: .35;
+      position: relative; z-index: 1;
     }
 
-    /* =========================================
-       4. PROBLEM
-    ========================================= */
+    /* ── PROBLEM ── */
     #problem {
-      background: var(--black);
-      color: var(--white);
-      border-bottom: var(--border-light);
-      padding: 96px 40px;
+      background: var(--dark);
+      color: #f5f4ef;
+      padding: 100px 40px;
     }
     .problem-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: start;
-      max-width: 1140px;
+      max-width: 1160px;
       margin: 0 auto;
     }
-    .problem-left {
-      position: sticky;
-      top: 80px;
-    }
-    .problem-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(44px, 5.5vw, 72px);
-      color: var(--white);
-      max-width: 480px;
+    .problem-left { position: sticky; top: 80px; }
+    .problem-hed {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(36px, 4.8vw, 62px);
+      line-height: 1.05;
+      color: #f5f4ef;
       margin-bottom: 24px;
-      text-transform: uppercase;
-      line-height: 1;
+      letter-spacing: -.02em;
     }
     .problem-intro {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 1.7;
-      opacity: 0.75;
-      max-width: 420px;
-      margin-top: 8px;
+      font-family: var(--body);
+      font-size: 14px;
+      line-height: 1.8;
+      color: #f5f4ef;
+      opacity: .45;
+      max-width: 360px;
     }
-
-    /* Problem cards */
-    .problem-cards {
-      display: flex;
-      flex-direction: column;
-    }
-    .problem-card {
-      border-top: 2px solid var(--white);
-      padding: 36px 32px;
-      position: relative;
+    .problem-cards { display: flex; flex-direction: column; }
+    .p-card {
+      padding: 32px 0;
+      border-top: 1px solid rgba(245,244,239,.08);
+      transition: padding-left .3s cubic-bezier(.16,1,.3,1);
       cursor: default;
-      transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .card-ghost-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 56px;
-      color: rgba(255,255,255,0.1);
-      line-height: 1;
+    .p-card:last-child { border-bottom: 1px solid rgba(245,244,239,.08); }
+    .p-card-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .2em;
+      color: #f5f4ef;
+      opacity: .28;
       margin-bottom: 12px;
-      transition: color 0.2s ease;
     }
-    .card-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 26px;
-      color: var(--white);
-      margin-bottom: 10px;
-      line-height: 1.1;
-      text-transform: uppercase;
-      transition: color 0.2s ease;
-    }
-    .card-body {
-      font-family: 'Instrument Sans', sans-serif;
+    .p-card-title {
+      font-family: var(--display);
       font-weight: 400;
-      font-size: 15px;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.65;
-      transition: color 0.2s ease;
+      font-size: 22px;
+      color: #f5f4ef;
+      margin-bottom: 10px;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      transition: opacity .25s;
+    }
+    .p-card-body {
+      font-family: var(--body);
+      font-size: 13px;
+      color: #f5f4ef;
+      opacity: .42;
+      line-height: 1.75;
     }
     @media (hover: hover) {
-      .problem-card:hover {
-        background-color: var(--white);
-        color: var(--black);
-      }
-      .problem-card:hover .card-ghost-num {
-        color: rgba(0,0,0,0.08);
-      }
-      .problem-card:hover .card-title {
-        color: var(--black);
-      }
-      .problem-card:hover .card-body {
-        color: rgba(0,0,0,0.7);
-      }
+      .p-card:hover { padding-left: 16px; }
+      .p-card:hover .p-card-title { opacity: .7; }
+      .p-card:hover .p-card-body { opacity: .62; }
     }
 
-    /* =========================================
-       5. HOW IT WORKS
-    ========================================= */
+    /* ── HOW IT WORKS ── */
     #how-it-works {
-      background: var(--white);
-      border-bottom: var(--border-dark);
-      padding: 96px 40px;
-    }
-    .steps-wrapper {
-      border: 2px solid var(--black);
+      background: var(--bg);
+      padding: 100px 40px;
+      border-bottom: 1px solid var(--ink-faint);
     }
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+      border: 1px solid var(--ink-faint);
     }
     .step-cell {
       padding: 48px 36px;
+      border-right: 1px solid var(--ink-faint);
       position: relative;
-      border-right: 2px solid var(--black);
     }
     .step-cell:last-child { border-right: none; }
-
-    .step-ghost-num {
+    .step-ghost {
       position: absolute;
-      top: 16px; right: 20px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 96px;
+      top: 12px; right: 20px;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 80px;
       line-height: 1;
-      color: rgba(0,0,0,0.06);
+      color: var(--ink);
+      opacity: .04;
+      letter-spacing: -.03em;
       pointer-events: none;
       user-select: none;
     }
-    .step-icon {
-      width: 48px; height: 48px;
-      border: 2px solid var(--black);
+    .step-icon-box {
+      width: 40px; height: 40px;
+      border: 1px solid var(--ink-faint);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      margin-bottom: 28px;
-      color: var(--black);
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 22px;
+      opacity: .6;
     }
     .step-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 28px;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 14px;
-      line-height: 1.1;
-      color: var(--black);
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
     .step-body {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 1.65;
-      color: #111;
+      font-family: var(--body);
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--ink);
+      opacity: .48;
     }
 
-    /* =========================================
-       6. OFFER
-    ========================================= */
+    /* ── OFFER ── */
     #offer {
-      background: var(--black);
-      color: var(--white);
-      border-bottom: var(--border-light);
-      padding: 96px 40px;
+      background: var(--dark);
+      color: #f5f4ef;
+      padding: 100px 40px;
     }
     .offer-panels {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 2px solid var(--white);
+      border: 1px solid rgba(245,244,239,.08);
     }
     .offer-left {
-      padding: 52px 48px;
-      border-right: 2px solid var(--white);
+      padding: 52px 44px;
+      border-right: 1px solid rgba(245,244,239,.08);
     }
-    .offer-panel-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 28px;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      color: var(--white);
-    }
-    .checklist {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .checklist-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .check-icon {
-      width: 24px; height: 24px;
-      border: 2px solid var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-      font-size: 11px;
-      color: var(--white);
-    }
-    .check-text-title {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--white);
-      display: block;
-    }
-    .check-text-desc {
-      font-family: 'Instrument Sans', sans-serif;
+    .offer-panel-hed {
+      font-family: var(--display);
       font-weight: 400;
-      font-size: 14px;
-      color: rgba(255,255,255,0.72);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .offer-right {
-      padding: 52px 48px;
-      background: rgba(255,255,255,0.03);
-    }
-    .pilot-badge {
-      display: inline-block;
-      background: var(--white);
-      color: var(--black);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      margin-bottom: 20px;
-    }
-    .offer-para {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .btn-outline-white {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: transparent;
-      color: var(--white);
-      border: 2px solid var(--white);
-      padding: 16px 40px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease;
-    }
-    .btn-outline-white:hover {
-      background: var(--white);
-      color: var(--black);
-    }
-    .guarantee-block {
-      margin-top: 36px;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      padding-top: 32px;
-    }
-    .guarantee-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Barlow Condensed', sans-serif;
       font-size: 22px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--white);
+      color: #f5f4ef;
+      margin-bottom: 32px;
+      letter-spacing: -.01em;
     }
-    .guarantee-label i { font-size: 16px; }
-    .guarantee-para {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.65;
+    .checklist { display: flex; flex-direction: column; gap: 20px; }
+    .c-item { display: flex; align-items: flex-start; gap: 14px; }
+    .c-dot {
+      width: 4px; height: 4px;
+      background: #f5f4ef;
+      opacity: .4;
+      border-radius: 50%;
+      flex-shrink: 0;
       margin-top: 10px;
     }
+    .c-title {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 13px;
+      color: #f5f4ef;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .c-desc {
+      font-family: var(--body);
+      font-size: 12px;
+      color: #f5f4ef;
+      opacity: .4;
+      display: block;
+      line-height: 1.65;
+    }
+    .offer-right {
+      padding: 52px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+    .offer-para {
+      font-family: var(--body);
+      font-size: 14px;
+      color: #f5f4ef;
+      opacity: .55;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .btn-outline {
+      display: block;
+      text-align: center;
+      background: transparent;
+      color: #f5f4ef;
+      border: 1px solid rgba(245,244,239,.2);
+      padding: 13px 28px;
+      font-family: var(--body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color .2s, opacity .2s;
+    }
+    .btn-outline:hover { border-color: rgba(245,244,239,.5); opacity: .8; }
+    .guarantee-block {
+      margin-top: auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(245,244,239,.08);
+    }
+    .guarantee-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 18px;
+      color: #f5f4ef;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 10px;
+      letter-spacing: -.01em;
+    }
+    .guarantee-title i { font-size: 12px; opacity: .5; }
+    .guarantee-para {
+      font-family: var(--body);
+      font-size: 12px;
+      color: #f5f4ef;
+      opacity: .4;
+      line-height: 1.7;
+    }
 
-    /* =========================================
-       7. FAQ
-    ========================================= */
+    /* ── FAQ ── */
     #faq {
-      background: var(--white);
-      border-bottom: var(--border-dark);
-      padding: 96px 40px;
+      background: var(--bg);
+      padding: 100px 40px;
+      border-bottom: 1px solid var(--ink-faint);
     }
-    .faq-list {
-      max-width: 760px;
-    }
-    .faq-item {
-      border-top: 2px solid var(--black);
-    }
-    .faq-item:last-child {
-      border-bottom: 2px solid var(--black);
-    }
+    .faq-list { max-width: 700px; }
+    .faq-item { border-top: 1px solid var(--ink-faint); }
+    .faq-item:last-child { border-bottom: 1px solid var(--ink-faint); }
     .faq-question {
       width: 100%;
       background: none;
@@ -712,117 +558,101 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 28px 0;
+      padding: 24px 0;
       cursor: pointer;
       text-align: left;
       gap: 16px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 18px;
       line-height: 1.3;
-      color: var(--black);
+      color: var(--ink);
+      letter-spacing: -.01em;
     }
     .faq-icon {
-      width: 32px; height: 32px;
-      border: 2px solid var(--black);
+      width: 26px; height: 26px;
+      border: 1px solid var(--ink-faint);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 14px;
-      color: var(--black);
-      transition: transform 0.25s ease, background-color 0.2s ease, color 0.2s ease;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: .5;
+      transition: transform .25s, opacity .2s;
     }
     .faq-item.open .faq-icon {
-      background-color: var(--black);
-      color: var(--white);
+      opacity: 1;
       transform: rotate(45deg);
     }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
-    }
-    .faq-item.open .faq-answer {
-      max-height: 300px;
-    }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
+    .faq-item.open .faq-answer { max-height: 320px; }
     .faq-answer-inner {
-      padding-bottom: 28px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 640px;
-      color: #111;
+      padding-bottom: 24px;
+      font-family: var(--body);
+      font-size: 14px;
+      line-height: 1.78;
+      color: var(--ink);
+      opacity: .55;
+      max-width: 560px;
     }
 
-    /* =========================================
-       8. BOOK A CALL
-    ========================================= */
+    /* ── BOOK A CALL ── */
     #book {
-      background: var(--black);
-      color: var(--white);
-      padding: 96px 40px 120px;
+      background: var(--dark);
+      color: #f5f4ef;
+      padding: 100px 40px 120px;
     }
     .book-grid {
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 80px;
       align-items: start;
-      max-width: 1140px;
+      max-width: 1160px;
       margin: 0 auto;
     }
-    .book-left {
-      position: sticky;
-      top: 80px;
-    }
-    .book-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(44px, 5vw, 72px);
-      color: var(--white);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      line-height: 1;
-    }
-    .book-subline {
-      font-family: 'Instrument Sans', sans-serif;
+    .book-left { position: sticky; top: 80px; }
+    .book-hed {
+      font-family: var(--display);
       font-weight: 400;
-      font-size: 17px;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.65;
-      margin-bottom: 36px;
+      font-size: clamp(38px, 4.8vw, 62px);
+      color: #f5f4ef;
+      line-height: 1.02;
+      letter-spacing: -.025em;
+      margin-bottom: 18px;
     }
-    .book-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 32px;
+    .book-sub {
+      font-family: var(--body);
+      font-size: 14px;
+      color: #f5f4ef;
+      opacity: .48;
+      line-height: 1.78;
+      margin-bottom: 32px;
     }
-    .book-meta-item {
+    .book-meta { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+    .b-meta-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.85);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #f5f4ef;
+      opacity: .32;
     }
-    .book-meta-item i { font-size: 13px; color: var(--white); }
-
+    .b-meta-item i { opacity: 1; font-size: 9px; }
     .book-right {
-      border: 2px solid var(--white);
+      border: 1px solid rgba(245,244,239,.1);
       overflow: hidden;
       min-height: 700px;
     }
 
-    /* =========================================
-       9. FOOTER
-    ========================================= */
+    /* ── FOOTER ── */
     footer {
-      background: var(--white);
-      border-top: 2px solid var(--black);
-      padding: 32px 40px;
+      background: var(--bg);
+      border-top: 1px solid var(--ink-faint);
+      padding: 28px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -830,154 +660,158 @@
       gap: 16px;
     }
     .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 0.04em;
-      color: var(--black);
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: .02em;
+      color: var(--ink);
     }
     .footer-copy {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 400;
-      font-size: 13px;
-      color: #444;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      color: var(--ink);
+      opacity: .28;
     }
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
+    .footer-links { display: flex; gap: 24px; }
     .footer-links a {
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 500;
-      font-size: 13px;
-      color: var(--black);
+      font-family: var(--body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--ink);
       text-decoration: none;
+      opacity: .38;
+      transition: opacity .2s;
     }
-    .footer-links a:hover { text-decoration: underline; }
+    .footer-links a:hover { opacity: .8; }
 
-    /* =========================================
-       RESPONSIVE ≤900px
-    ========================================= */
+    /* ── TWEAKS ── */
+    #tweaks-panel {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 999;
+      background: var(--dark);
+      border: 1px solid rgba(245,244,239,.12);
+      padding: 20px;
+      width: 220px;
+      font-family: var(--body);
+    }
+    #tweaks-panel h3 {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #f5f4ef;
+      opacity: .4;
+      margin-bottom: 16px;
+    }
+    .tw-row { margin-bottom: 14px; }
+    .tw-row label {
+      display: block;
+      font-size: 11px;
+      color: #f5f4ef;
+      opacity: .45;
+      margin-bottom: 6px;
+    }
+    .tw-row select,
+    .tw-row input[type=color] {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #f5f4ef;
+      padding: 6px 8px;
+      font-family: var(--body);
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .tw-row input[type=color] { height: 32px; padding: 2px; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav#main-nav { padding: 0 20px; }
       .nav-link { display: none; }
 
-      #hero { padding: 120px 24px 80px; }
-      .hero-two-col { grid-template-columns: 1fr; }
-      .hero-right {
-        padding-left: 0;
-        border-left: none;
-        margin-top: 32px;
-      }
+      #hero { padding: 110px 24px 90px; }
+      .hero-bottom { grid-template-columns: 1fr; gap: 28px; }
 
       #vsl { padding: 48px 24px; }
 
-      #problem { padding: 64px 24px; }
-      .problem-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
+      #problem { padding: 72px 24px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 44px; }
       .problem-left { position: static; }
 
-      #how-it-works { padding: 64px 24px; }
+      #how-it-works { padding: 72px 24px; }
       .steps-grid { grid-template-columns: 1fr; }
-      .step-cell {
-        border-right: none;
-        border-bottom: 2px solid var(--black);
-      }
+      .step-cell { border-right: none; border-bottom: 1px solid var(--ink-faint); }
       .step-cell:last-child { border-bottom: none; }
 
-      #offer { padding: 64px 24px; }
+      #offer { padding: 72px 24px; }
       .offer-panels { grid-template-columns: 1fr; }
-      .offer-left {
-        border-right: none;
-        border-bottom: 2px solid var(--white);
-      }
-      .offer-right { padding-top: 48px; }
+      .offer-left { border-right: none; border-bottom: 1px solid rgba(245,244,239,.08); }
 
-      #faq { padding: 64px 24px; }
+      #faq { padding: 72px 24px; }
 
-      #book { padding: 64px 24px 80px; }
+      #book { padding: 72px 24px 80px; }
       .book-grid { grid-template-columns: 1fr; }
       .book-left { position: static; }
 
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-        padding: 28px 24px;
-      }
-      .footer-logo { order: 1; }
-      .footer-links { order: 2; }
-      .footer-copy  { order: 3; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; gap: 16px; }
     }
 
-    /* =========================================
-       RESPONSIVE ≤600px
-    ========================================= */
     @media (max-width: 600px) {
-      .hero-headline { font-size: clamp(52px, 14vw, 80px); }
-      .vsl-box { height: 200px; }
-      .offer-left,
-      .offer-right { padding: 36px 28px; }
+      .hero-hed { font-size: clamp(54px, 14vw, 80px); }
+      .vsl-box { height: 220px; }
+      .offer-left, .offer-right { padding: 36px 24px; }
     }
   </style>
-</head>
-<body>
+<link id="gfont-Noto-Sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap"><link id="gfont-Playfair-Display" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&amp;display=swap"><link id="gfont-Lato" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&amp;display=swap"></head>
+<body data-new-gr-c-s-check-loaded="14.1284.0" data-gr-ext-installed="" data-cc-id="cc-1" style="cursor: crosshair; font-family: Lato;">
 
-  <!-- ========================================
-       1. NAV
-  ======================================== -->
+  <!-- NAV -->
   <nav id="main-nav">
     <a class="nav-logo" href="#">
-      <img src="favicon.svg" alt="AcroGrowth" />
-      <span class="nav-logo-text">ACROGROWTH</span>
+      <img src="uploads/acrogrowth transparent.png" alt="AcroGrowth">
+      <span class="nav-logo-name">AcroGrowth</span>
     </a>
-    <div class="nav-toolbar">
-      <a class="nav-cell nav-link" href="#how-it-works">Process</a>
-      <a class="nav-cell nav-link" href="#offer">Offer</a>
-      <a class="nav-cell nav-link" href="#faq">FAQ</a>
-      <a class="nav-cell nav-cta"  href="#book">Book a Call →</a>
+    <div class="nav-links">
+      <a class="nav-link" href="#how-it-works">Process</a>
+      <a class="nav-link" href="#offer">Offer</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="nav-cta" href="#book">Book a Call</a>
     </div>
   </nav>
 
-  <!-- ========================================
-       2. HERO
-  ======================================== -->
+  <!-- HERO -->
   <section id="hero">
     <div class="inner">
 
-      <div class="hero-eyebrow fade-in fade-in-1">
-        B2B Outbound for Tech Founders
+      <div class="eyebrow fi fi-1">
+        LinkedIn Outbound · B2B Tech &amp; Financial Advisors
       </div>
 
-      <h1 class="hero-headline fade-in fade-in-2">
-        8 Qualified Meetings.<br />Every Month.
+      <h1 class="hero-hed fi fi-2" style="font-size: clamp(90px, 14vw, 200px);">
+        <span class="num">10</span> Qualified<br>
+        <span class="it">Meetings.</span><br>
+        Every Month.
       </h1>
 
-      <hr class="hero-rule fade-in fade-in-3" />
-
-      <div class="hero-two-col fade-in fade-in-4">
-        <div class="hero-left">
-          <p class="hero-subheadline">
-            We run your entire LinkedIn outreach and content machine — so your calendar fills with decision-makers, not noise. Done for you. Guaranteed.
-          </p>
-          <a class="btn-primary" href="#book">Start Your Free Pilot →</a>
-          <div class="hero-guarantee">
+      <div class="hero-bottom fi fi-3">
+        <p class="hero-subline">
+          We build and run full LinkedIn campaigns that consistently book qualified sales calls with your ideal clients. All done for you.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#book">Schedule a Call</a>
+          <div class="guarantee-line">
             <i class="fa-solid fa-shield-halved"></i>
-            Full refund if we miss the target
+            Results guaranteed
           </div>
-        </div>
-        <div class="hero-right">
-          <span class="proof-tag">LinkedIn Outbound</span>
-          <span class="proof-tag">Sales Navigator</span>
-          <span class="proof-tag">Done For You</span>
         </div>
       </div>
 
     </div>
 
-    <div class="ticker-strip">
+    <div class="ticker fi fi-4">
       <div class="ticker-track">
         <span class="ticker-item">LinkedIn Outbound</span>
         <span class="ticker-item">Sales Navigator</span>
@@ -985,280 +819,242 @@
         <span class="ticker-item">Content Creation</span>
         <span class="ticker-item">ICP Lead Lists</span>
         <span class="ticker-item">Inbound Pipeline</span>
-        <span class="ticker-item">8 Meetings / Month</span>
-        <span class="ticker-item">Done For You</span>
-        <!-- duplicate for seamless loop -->
+        <span class="ticker-item">10 Meetings / Month</span>
+        <span class="ticker-item">Appointment Setting</span>
         <span class="ticker-item">LinkedIn Outbound</span>
         <span class="ticker-item">Sales Navigator</span>
         <span class="ticker-item">InMail Sequences</span>
         <span class="ticker-item">Content Creation</span>
         <span class="ticker-item">ICP Lead Lists</span>
         <span class="ticker-item">Inbound Pipeline</span>
-        <span class="ticker-item">8 Meetings / Month</span>
-        <span class="ticker-item">Done For You</span>
+        <span class="ticker-item">10 Meetings / Month</span>
+        <span class="ticker-item">Appointment Setting</span>
       </div>
     </div>
   </section>
 
-  <!-- ========================================
-       3. VSL PLACEHOLDER
-  ======================================== -->
+  <!-- VSL PLACEHOLDER -->
   <section id="vsl">
     <div class="inner">
       <div class="vsl-box">
-        <div class="vsl-play-icon"><i class="fa-solid fa-play"></i></div>
-        <div class="vsl-label">Overview Video — Coming Soon</div>
-        <div class="vsl-subtext">See exactly how AcroGrowth fills your calendar</div>
+        <div class="vsl-play"><i class="fa-solid fa-play"></i></div>
+        <div class="vsl-title">Overview — Coming Soon</div>
+        <div class="vsl-sub">See exactly how AcroGrowth fills your calendar</div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================
-       4. PROBLEM
-  ======================================== -->
+  <!-- PROBLEM -->
   <section id="problem">
     <div class="problem-grid">
 
       <div class="problem-left">
-        <div class="section-label reveal">——— THE PROBLEM</div>
-        <h2 class="problem-headline reveal">YOUR PIPELINE SHOULDN'T BE A GUESSING GAME.</h2>
-        <p class="problem-intro reveal">Most tech founders are doing everything right — great product, solid team — and still staring at an empty pipeline. Here's why.</p>
+        <div class="eyebrow reveal visible" style="color:rgba(245,244,239,.4);">——— The Problem</div>
+        <h2 class="problem-hed reveal visible">
+          Your pipeline shouldn't be a <span class="it">guessing game.</span>
+        </h2>
+        <p class="problem-intro reveal visible">
+          Most founders and advisors are doing everything right. Great product, strong offer. And still staring at an empty pipeline. Here's why.
+        </p>
       </div>
 
       <div class="problem-cards">
-        <div class="problem-card reveal">
-          <div class="card-ghost-num">01</div>
-          <div class="card-title">Outreach Dies in the Inbox</div>
-          <div class="card-body">Generic cold messages get ignored. Without a targeted ICP list and proven sequence, you're burning time to generate zero pipeline.</div>
+        <div class="p-card reveal visible">
+          <div class="p-card-num">01</div>
+          <div class="p-card-title">Outreach Dies in the Inbox</div>
+          <div class="p-card-body">Generic cold messages get ignored. Without a targeted lead list and a tested sequence, you generate zero pipeline from LinkedIn.</div>
         </div>
-        <div class="problem-card reveal">
-          <div class="card-ghost-num">02</div>
-          <div class="card-title">Inconsistent Pipeline Every Quarter</div>
-          <div class="card-body">You close deals, go heads-down on delivery, look up three months later to a dead pipeline. The feast-or-famine cycle isn't a growth strategy.</div>
+        <div class="p-card reveal visible">
+          <div class="p-card-num">02</div>
+          <div class="p-card-title">Inconsistent Pipeline Every Quarter</div>
+          <div class="p-card-body">You close deals, go heads-down on delivery, look up three months later at a dead pipeline. Feast and famine is not a growth strategy.</div>
         </div>
-        <div class="problem-card reveal">
-          <div class="card-ghost-num">03</div>
-          <div class="card-title">No Time to Do It Yourself</div>
-          <div class="card-body">LinkedIn content, connection sequences, follow-ups, InMail campaigns — each one is a part-time job. Together, impossible to manage while running a company.</div>
+        <div class="p-card reveal visible">
+          <div class="p-card-num">03</div>
+          <div class="p-card-title">No Time to Do It Yourself</div>
+          <div class="p-card-body">LinkedIn content, connection sequences, follow-ups, InMail campaigns. Each one is a part-time job. Together, impossible to manage while running a company.</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ========================================
-       5. HOW IT WORKS
-  ======================================== -->
+  <!-- HOW IT WORKS -->
   <section id="how-it-works">
     <div class="inner">
-      <div class="section-label reveal">——— HOW IT WORKS</div>
-      <h2 class="section-headline reveal">THREE STEPS. ONE CALENDAR FULL.</h2>
+      <div class="eyebrow reveal visible">——— How It Works</div>
+      <h2 class="section-hed reveal visible">Three steps.<br><span class="it">One calendar full.</span></h2>
 
-      <div class="steps-wrapper">
-        <div class="steps-grid">
-
-          <div class="step-cell reveal">
-            <span class="step-ghost-num">01</span>
-            <div class="step-icon"><i class="fa-solid fa-crosshairs"></i></div>
-            <div class="step-title">We Build Your ICP Lead List</div>
-            <p class="step-body">We use Sales Navigator to identify your exact buyers — filtered by title, company size, industry, and buying signals — then build a verified, high-intent target list.</p>
-          </div>
-
-          <div class="step-cell reveal">
-            <span class="step-ghost-num">02</span>
-            <div class="step-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-            <div class="step-title">We Run Outreach + Create Content</div>
-            <p class="step-body">We execute multi-touch LinkedIn sequences — connection requests, InMails, follow-ups — while publishing content on your profile that attracts inbound leads.</p>
-          </div>
-
-          <div class="step-cell reveal">
-            <span class="step-ghost-num">03</span>
-            <div class="step-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="step-title">You Get Meetings on Your Calendar</div>
-            <p class="step-body">Qualified prospects book directly. You show up, close deals. 8 qualified meetings per month, guaranteed.</p>
-          </div>
-
+      <div class="steps-grid">
+        <div class="step-cell reveal visible">
+          <span class="step-ghost">01</span>
+          <div class="step-icon-box"><i class="fa-solid fa-crosshairs"></i></div>
+          <div class="step-title">We Build Your ICP Lead List</div>
+          <p class="step-body">We use Sales Navigator to identify your exact buyers, filtered by title, company size, industry, and buying signals, then build a verified, high-intent target list.</p>
+        </div>
+        <div class="step-cell reveal visible">
+          <span class="step-ghost">02</span>
+          <div class="step-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div class="step-title">We Run Outreach and Create Content</div>
+          <p class="step-body">We execute multi-touch LinkedIn sequences including connection requests, InMails, and follow-ups, while publishing content on your profile that attracts inbound leads.</p>
+        </div>
+        <div class="step-cell reveal visible">
+          <span class="step-ghost">03</span>
+          <div class="step-icon-box"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="step-title">You Get Meetings on Your Calendar</div>
+          <p class="step-body">Qualified prospects book directly into your calendar. You show up and close. Ten qualified meetings per month, guaranteed.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================
-       6. OFFER
-  ======================================== -->
+  <!-- OFFER -->
   <section id="offer">
     <div class="inner">
-      <div class="section-label reveal">——— THE OFFER</div>
-      <h2 class="section-headline reveal">EVERYTHING YOU NEED. NOTHING YOU DON'T.</h2>
+      <div class="eyebrow reveal visible" style="color:rgba(245,244,239,.4);">——— The Offer</div>
+      <h2 class="section-hed reveal visible" style="color:#f5f4ef;">Everything you need.<br><span class="it">Nothing you don't.</span></h2>
 
       <div class="offer-panels">
-
-        <div class="offer-left reveal">
-          <div class="offer-panel-title">WHAT'S INCLUDED</div>
+        <div class="offer-left reveal visible">
+          <div class="offer-panel-hed">What's Included</div>
           <div class="checklist">
-
-            <div class="checklist-item">
-              <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="c-item">
+              <div class="c-dot"></div>
               <div>
-                <strong class="check-text-title">8 Qualified Meetings / Month</strong>
-                <span class="check-text-desc">Decision-makers who match your ICP, pre-qualified before they hit your calendar.</span>
+                <strong class="c-title">10 Qualified Meetings / Month</strong>
+                <span class="c-desc">Decision-makers who match your ICP, pre-qualified before they hit your calendar.</span>
               </div>
             </div>
-
-            <div class="checklist-item">
-              <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="c-item">
+              <div class="c-dot"></div>
               <div>
-                <strong class="check-text-title">Full LinkedIn Outbound Campaign</strong>
-                <span class="check-text-desc">Sales Navigator list building, connection sequences, InMail campaigns, and follow-ups — executed for you.</span>
+                <strong class="c-title">Full LinkedIn Outbound Campaign</strong>
+                <span class="c-desc">Sales Navigator list building, connection sequences, InMail campaigns, and follow-ups, all executed for you.</span>
               </div>
             </div>
-
-            <div class="checklist-item">
-              <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="c-item">
+              <div class="c-dot"></div>
               <div>
-                <strong class="check-text-title">LinkedIn Content Creation</strong>
-                <span class="check-text-desc">We write and post authority content on your profile to drive inbound interest and warm up cold outreach.</span>
+                <strong class="c-title">LinkedIn Content Creation</strong>
+                <span class="c-desc">We write and post authority content on your profile to build inbound interest and warm up cold outreach.</span>
               </div>
             </div>
-
-            <div class="checklist-item">
-              <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="c-item">
+              <div class="c-dot"></div>
               <div>
-                <strong class="check-text-title">ICP Lead List, Built Fresh Each Month</strong>
-                <span class="check-text-desc">Verified, high-intent leads sourced via Sales Navigator — no recycled databases.</span>
+                <strong class="c-title">ICP Lead List, Built Fresh Each Month</strong>
+                <span class="c-desc">Verified, high-intent leads sourced via Sales Navigator. No recycled databases.</span>
               </div>
             </div>
-
-            <div class="checklist-item">
-              <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="c-item">
+              <div class="c-dot"></div>
               <div>
-                <strong class="check-text-title">Weekly Reporting</strong>
-                <span class="check-text-desc">You see exactly what's running, what's working, and what's booked — no black boxes.</span>
+                <strong class="c-title">Weekly Reporting</strong>
+                <span class="c-desc">You see exactly what's running, what's working, and what's booked. No black boxes.</span>
               </div>
             </div>
-
           </div>
         </div>
 
-        <div class="offer-right reveal">
-          <span class="pilot-badge">Free 2-Week Pilot</span>
-          <div class="offer-panel-title">TRY IT BEFORE YOU COMMIT</div>
-          <p class="offer-para">Start with a free two-week pilot — no payment required. We'll launch a live campaign, prove the process works for your market, and hand you results you can verify before any contract discussion.</p>
-          <a class="btn-outline-white" href="#book">BOOK A CALL TO START</a>
-
-          <div class="guarantee-block">
-            <div class="guarantee-label">
+        <div class="offer-right reveal visible">
+          <div class="offer-panel-hed">How We Engage</div>
+          <p class="offer-para">We take full ownership of your LinkedIn pipeline from day one. You get dedicated account management, weekly reporting, and direct access to the team running your campaigns.</p>
+          <a class="btn-outline" href="#book">Schedule a Call</a>
+          <div class="guarantee-block" style="margin-top:36px;">
+            <div class="guarantee-title">
               <i class="fa-solid fa-shield-halved"></i>
-              THE GUARANTEE
+              The Guarantee
             </div>
-            <p class="guarantee-para">If we don't deliver 8 qualified meetings in your first full month, you get a full refund. No fine print, no partial credits. We hold ourselves accountable to the number.</p>
+            <p class="guarantee-para">If we don't deliver 10 qualified meetings in your first full month, we issue a partial refund net of infrastructure and operational costs, agreed upfront. No ambiguity.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ========================================
-       7. FAQ
-  ======================================== -->
+  <!-- FAQ -->
   <section id="faq">
     <div class="inner">
-      <div class="section-label reveal">——— FAQ</div>
-      <h2 class="section-headline reveal">FAIR QUESTIONS. STRAIGHT ANSWERS.</h2>
+      <div class="eyebrow reveal visible">——— FAQ</div>
+      <h2 class="section-hed reveal visible">Common questions.<br><span class="it">Direct answers.</span></h2>
 
       <div class="faq-list">
-
-        <div class="faq-item reveal">
+        <div class="faq-item reveal visible">
           <button class="faq-question" aria-expanded="false">
-            What counts as a "qualified" meeting?
+            What counts as a qualified meeting?
             <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
           </button>
           <div class="faq-answer" role="region">
-            <div class="faq-answer-inner">A qualified meeting means a booked call with a decision-maker — typically a founder, C-suite executive, or VP — at a company that matches your ICP criteria: industry, headcount, revenue range, and any other filters we agree on upfront. If a meeting doesn't meet those criteria, it doesn't count toward your 8.</div>
+            <div class="faq-answer-inner">A qualified meeting is a booked call with a decision-maker at a company that matches your agreed ICP criteria: title, industry, headcount, and revenue range. If a booking doesn't meet those criteria, it doesn't count toward your 10.</div>
           </div>
         </div>
-
-        <div class="faq-item reveal">
+        <div class="faq-item reveal visible">
           <button class="faq-question" aria-expanded="false">
-            What happens if you don't hit 8 meetings?
+            What happens if you don't hit 10 meetings?
             <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
           </button>
           <div class="faq-answer" role="region">
-            <div class="faq-answer-inner">You get a full refund. No partial credits, no rollovers, no "we'll make it up next month." If we miss the number in your first full month of engagement, we return your money. The guarantee exists because we're confident in the system — and because accountability is the only way to build trust.</div>
+            <div class="faq-answer-inner">If we miss the target in your first full month, we issue a partial refund net of infrastructure and operational costs. Those costs are defined clearly before we begin, so there are no surprises. We stand behind the work.</div>
           </div>
         </div>
-
-        <div class="faq-item reveal">
+        <div class="faq-item reveal visible">
           <button class="faq-question" aria-expanded="false">
             Do I have to do anything once we start?
             <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
           </button>
           <div class="faq-answer" role="region">
-            <div class="faq-answer-inner">Very little. We run the entire outreach operation — list building, content, sequences, follow-ups. You'll spend roughly 30–60 minutes onboarding: sharing your ICP definition, approving messaging, and giving us access to your LinkedIn. After that, your only job is to show up to the meetings we book.</div>
+            <div class="faq-answer-inner">Very little. We handle list building, content, sequences, and follow-ups. Onboarding takes roughly 30 to 60 minutes: your ICP definition, messaging approval, and LinkedIn access. After that, your only job is to show up to the meetings we book.</div>
           </div>
         </div>
-
-        <div class="faq-item reveal">
+        <div class="faq-item reveal visible">
           <button class="faq-question" aria-expanded="false">
-            How does the free 2-week pilot work?
+            Who is this for?
             <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
           </button>
           <div class="faq-answer" role="region">
-            <div class="faq-answer-inner">We kick off a live campaign at no cost — same process, same tools, same effort as a paying client. In two weeks, you'll see real outreach activity, real responses, and real data. If it's working and you want to continue, we move to a paid engagement. If not, you walk away with zero financial risk.</div>
+            <div class="faq-answer-inner">We work with B2B tech founders, CEOs, and Independent Financial Advisors who have a strong offer, an identifiable target market, and want a consistent flow of qualified conversations without managing the outreach themselves.</div>
           </div>
         </div>
-
-        <div class="faq-item reveal">
+        <div class="faq-item reveal visible">
           <button class="faq-question" aria-expanded="false">
-            What does LinkedIn content creation actually involve?
+            What does LinkedIn content creation involve?
             <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
           </button>
           <div class="faq-answer" role="region">
-            <div class="faq-answer-inner">We write and schedule posts directly on your LinkedIn profile — typically 3–5 posts per week — built around your expertise, your ICP's pain points, and topics that attract inbound interest. Strategic content that positions you as a credible resource for the exact buyers you're targeting, so outreach lands warmer.</div>
+            <div class="faq-answer-inner">We write and schedule posts on your LinkedIn profile, typically 3 to 5 per week, built around your expertise and your ICP's priorities. The goal is to position you as a credible resource for the exact buyers you're targeting, so outreach lands warmer.</div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ========================================
-       8. BOOK A CALL
-  ======================================== -->
+  <!-- BOOK A CALL -->
   <section id="book">
     <div class="book-grid">
 
-      <div class="book-left reveal">
-        <div class="section-label">——— BOOK A CALL</div>
-        <h2 class="book-headline">SEE IF YOU QUALIFY.</h2>
-        <p class="book-subline">15 minutes. We'll look at your ICP, your current pipeline, and tell you honestly whether we can deliver for your business.</p>
-        <a class="btn-outline-white" href="#calendly-widget">PICK A TIME BELOW</a>
+      <div class="book-left reveal visible">
+        <div class="eyebrow" style="color:rgba(245,244,239,.4);">——— Book a Call</div>
+        <h2 class="book-hed">See if you<br><span class="it">qualify.</span></h2>
+        <p class="book-sub">15 minutes. We'll assess your ICP, your current pipeline, and tell you honestly whether we're the right fit.</p>
         <div class="book-meta">
-          <div class="book-meta-item"><i class="fa-solid fa-clock"></i> 15-minute intro call</div>
-          <div class="book-meta-item"><i class="fa-solid fa-video"></i> Video or phone</div>
-          <div class="book-meta-item"><i class="fa-solid fa-shield-halved"></i> No commitment required</div>
+          <div class="b-meta-item"><i class="fa-solid fa-clock"></i> 15-minute intro call</div>
+          <div class="b-meta-item"><i class="fa-solid fa-video"></i> Video or phone</div>
+          <div class="b-meta-item"><i class="fa-solid fa-shield-halved"></i> No commitment required</div>
         </div>
       </div>
 
-      <div class="book-right reveal" id="calendly-widget">
-        <div
-          class="calendly-inline-widget"
-          data-url="https://calendly.com/leomanhal/new-meeting"
-          style="min-width:320px;height:700px;"
-        ></div>
+      <div class="book-right reveal visible" id="calendly-widget">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/leomanhal/new-meeting" style="position: relative;min-width:320px;height:700px;" data-processed="true"><div class="calendly-spinner"><div class="calendly-bounce1"></div><div class="calendly-bounce2"></div><div class="calendly-bounce3"></div></div><iframe src="https://calendly.com/leomanhal/new-meeting?embed_domain=e2e24e0a-e910-4816-8129-5f5ef82be9c1.claudeusercontent.com&amp;embed_type=Inline" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly"></iframe></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ========================================
-       9. FOOTER
-  ======================================== -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">ACROGROWTH</div>
+    <div class="footer-logo">AcroGrowth</div>
     <div class="footer-copy">© 2026 AcroGrowth. All rights reserved.</div>
-    <nav class="footer-links" aria-label="Footer navigation">
+    <nav class="footer-links" aria-label="Footer">
       <a href="#how-it-works">Process</a>
       <a href="#offer">Offer</a>
       <a href="#faq">FAQ</a>
@@ -1266,62 +1062,104 @@
     </nav>
   </footer>
 
-  <!-- Calendly JS -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <!-- TWEAKS -->
+  <div id="tweaks-panel" style="display: block;">
+    <h3>Tweaks</h3>
+    <div class="tw-row">
+      <label>Hero size</label>
+      <select id="tw-herosize">
+        <option value="compact">Compact</option>
+        <option value="default" selected="">Default</option>
+        <option value="large">Large</option>
+      </select>
+    </div>
+    <div class="tw-row">
+      <label>Background tone</label>
+      <select id="tw-bg">
+        <option value="#f5f4ef" selected="">Warm Linen</option>
+        <option value="#f8f7f4">Pale Ivory</option>
+        <option value="#f0efea">Stone</option>
+      </select>
+    </div>
+  </div>
 
+  <script src="https://assets.calendly.com/assets/external/widget.js" async=""></script>
   <script>
-    /* Smooth scroll for all anchor links */
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "heroSize": "default",
+      "bgTone": "#f5f4ef"
+    }/*EDITMODE-END*/;
+
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', function(e) {
-        const id = this.getAttribute('href');
-        const target = document.querySelector(id);
+        const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
+          const top = target.getBoundingClientRect().top + window.pageYOffset - 60;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       });
     });
 
-    /* Scroll reveal — IntersectionObserver */
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObs.unobserve(entry.target);
-        }
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    /* FAQ accordion */
+    // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', function() {
         const item = this.closest('.faq-item');
         const isOpen = item.classList.contains('open');
-
-        // Close all
         document.querySelectorAll('.faq-item').forEach(i => {
           i.classList.remove('open');
           i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         });
-
-        // Toggle open
-        if (!isOpen) {
-          item.classList.add('open');
-          this.setAttribute('aria-expanded', 'true');
-        }
+        if (!isOpen) { item.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
       });
     });
 
-    /* Calendly init — polling fallback */
+    // Calendly init
     const poll = setInterval(() => {
-      if (window.Calendly) {
+      if (window.Calendly && typeof Calendly.initInlineWidgets === 'function') {
         Calendly.initInlineWidgets();
         clearInterval(poll);
       }
     }, 300);
+
+    // Tweaks
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').style.display = 'block';
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+    function applyTweaks(t) {
+      if (t.bgTone) document.documentElement.style.setProperty('--bg', t.bgTone);
+      if (t.heroSize) {
+        const sizes = { compact: 'clamp(52px,8vw,110px)', default: 'clamp(70px,11.5vw,168px)', large: 'clamp(90px,14vw,200px)' };
+        document.querySelector('.hero-hed').style.fontSize = sizes[t.heroSize] || sizes.default;
+      }
+    }
+    applyTweaks(TWEAK_DEFAULTS);
+
+    document.getElementById('tw-bg').value       = TWEAK_DEFAULTS.bgTone;
+    document.getElementById('tw-herosize').value = TWEAK_DEFAULTS.heroSize;
+
+    document.getElementById('tw-bg').addEventListener('change', function() {
+      document.documentElement.style.setProperty('--bg', this.value);
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { bgTone: this.value } }, '*');
+    });
+    document.getElementById('tw-herosize').addEventListener('change', function() {
+      const sizes = { compact: 'clamp(52px,8vw,110px)', default: 'clamp(70px,11.5vw,168px)', large: 'clamp(90px,14vw,200px)' };
+      document.querySelector('.hero-hed').style.fontSize = sizes[this.value];
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { heroSize: this.value } }, '*');
+    });
   </script>
 
-</body>
-</html>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
