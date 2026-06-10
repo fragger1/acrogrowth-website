@@ -662,7 +662,6 @@
       <div class="clients-row">
         <div class="client-chip"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
         <div class="client-chip"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-chip"><img src="relaydemandlogo.jpeg" alt="RelayDemand"></div>
       </div>
     </div>
   </section>
@@ -875,6 +874,12 @@
 
   <script async src="https://assets.calendly.com/assets/external/widget.js"></script>
   <script>
+    // ── Marquee: duplicate content so the -50% loop is seamless ──
+    const mqTrack = document.getElementById('mq-track');
+    const mqItem = mqTrack.children[0];
+    const mqPerHalf = Math.max(1, Math.ceil(window.innerWidth / mqItem.offsetWidth) + 1);
+    for (let i = 1; i < mqPerHalf * 2; i++) mqTrack.appendChild(mqItem.cloneNode(true));
+
     // ── Scroll reveal ──
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
