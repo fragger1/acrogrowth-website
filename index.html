@@ -4,432 +4,586 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AcroGrowth — 10 Qualified Meetings / Month for B2B Leaders</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Spline+Sans+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <style>
-    /* ── Variables ── */
+    /* ════════ TOKENS ════════ */
     :root {
-      --bg:         #0c0a08;
-      --bg-alt:     #0f0d0b;
-      --bg-mid:     #111009;
-      --gold:       #b4945a;
-      --gold-dim:   rgba(180,148,90,0.35);
-      --gold-faint: rgba(180,148,90,0.1);
-      --ink:        #f0ebe1;
-      --ink-dim:    rgba(240,235,225,0.55);
-      --ink-faint:  rgba(240,235,225,0.18);
-      --border:     1px solid rgba(180,148,90,0.18);
-      --display:    'Cormorant Garamond', Georgia, serif;
-      --body:       'DM Sans', system-ui, sans-serif;
+      --paper:     #f6f4ef;
+      --paper-dim: #efede6;
+      --ink:       #0d0d0c;
+      --ink-dim:   rgba(13,13,12,0.62);
+      --ink-faint: rgba(13,13,12,0.28);
+      --line:      rgba(13,13,12,0.14);
+      --black:     #0c0c0b;
+      --black-card:#151514;
+      --wline:     rgba(246,244,239,0.16);
+      --white:     #f6f4ef;
+      --white-dim: rgba(246,244,239,0.62);
+      --white-faint:rgba(246,244,239,0.3);
+      --display:   'Bricolage Grotesque', Georgia, sans-serif;
+      --mono:      'Spline Sans Mono', monospace;
+      --ease:      cubic-bezier(.22,1,.36,1);
+      --hard:      8px 8px 0 var(--ink);
     }
 
-    /* ── Resets ── */
+    /* ════════ RESET ════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--body); background: var(--bg); color: var(--ink); overflow-x: hidden; }
-
-    /* ── Keyframes ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    body {
+      font-family: var(--display); font-weight: 400;
+      background: var(--paper); color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    @keyframes scroll-left {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    ::selection { background: var(--ink); color: var(--paper); }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--paper); }
+    ::-webkit-scrollbar-thumb { background: #c9c6bd; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a9a69d; }
+
+    /* film grain */
+    body::after {
+      content: ''; position: fixed; inset: -50%; z-index: 2000;
+      pointer-events: none; opacity: .04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 9s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%,100% { transform: translate(0,0); } 10% { transform: translate(-3%,-5%); }
+      20% { transform: translate(-7%,3%); }  30% { transform: translate(4%,-9%); }
+      40% { transform: translate(-2%,8%); }  50% { transform: translate(-7%,4%); }
+      60% { transform: translate(8%,0); }    70% { transform: translate(0,6%); }
+      80% { transform: translate(2%,9%); }   90% { transform: translate(-5%,3%); }
     }
 
-    /* ── Fade-in on load ── */
-    .fi { opacity: 0; animation: fadeUp 0.9s cubic-bezier(.16,1,.3,1) forwards; }
-    .fi-1 { animation-delay: .08s; }
-    .fi-2 { animation-delay: .22s; }
-    .fi-3 { animation-delay: .38s; }
-    .fi-4 { animation-delay: .54s; }
+    /* ════════ KEYFRAMES ════════ */
+    @keyframes lineUp { from { transform: translateY(110%); } to { transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(13,13,12,.35); } 50% { opacity: .55; box-shadow: 0 0 0 5px rgba(13,13,12,0); } }
+    @keyframes feedIn { from { opacity: 0; transform: translateY(-14px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-    /* ── Scroll reveal ── */
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
-    }
+    /* ════════ REVEAL ════════ */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; }
 
-    /* ── Shared ── */
-    .inner { max-width: 1140px; margin: 0 auto; width: 100%; }
-
-    .section-eyebrow {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold);
-      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+    /* ════════ SHARED ════════ */
+    .inner { max-width: 1180px; margin: 0 auto; width: 100%; }
+    .eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--ink);
+      display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
     }
-    .section-eyebrow::before {
-      content: ''; display: inline-block; width: 22px; height: 1px; background: var(--gold);
-    }
+    .eyebrow::before { content: ''; width: 8px; height: 8px; background: var(--ink); flex-shrink: 0; }
+    .dark .eyebrow { color: var(--white); }
+    .dark .eyebrow::before { background: var(--white); }
     .section-hed {
-      font-family: var(--display); font-size: clamp(34px, 3.5vw, 52px);
-      font-weight: 600; line-height: 1.06; letter-spacing: -0.02em;
-      color: var(--ink); margin-bottom: 52px;
+      font-size: clamp(38px, 4.6vw, 64px); font-weight: 750;
+      line-height: .98; letter-spacing: -0.03em; margin-bottom: 56px;
+      text-wrap: balance;
     }
-    .section-hed em { font-style: italic; color: var(--gold); }
+    .hl-box {
+      background: var(--ink); color: var(--paper);
+      padding: 0 .14em; display: inline-block; line-height: 1.05;
+    }
+    .dark .hl-box { background: var(--white); color: var(--ink); }
+    .mono-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); }
 
-    /* ── NAV ── */
+    /* ════════ NAV ════════ */
     nav#main-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 60px;
-      background: rgba(12,10,8,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 66px; padding: 0 40px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--ink);
     }
-    .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
-    .nav-logo-main {
-      font-family: var(--display); font-size: 22px; font-weight: 600;
-      color: var(--ink); letter-spacing: 0.02em;
-    }
-    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 36px; width: auto; display: block; mix-blend-mode: multiply; }
+    .nav-logo-text { font-weight: 750; font-size: 19px; letter-spacing: -.02em; color: var(--ink); }
+    .nav-right { display: flex; align-items: center; gap: 30px; }
     .nav-link {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-dim);
-      text-decoration: none; transition: color .2s;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-dim); text-decoration: none; transition: color .2s;
     }
-    .nav-link:hover { color: var(--gold); }
+    .nav-link:hover { color: var(--ink); }
     .nav-cta {
-      border: 1px solid var(--gold-dim); color: var(--gold);
-      font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 9px 20px;
-      text-decoration: none; transition: background .2s, color .2s;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--paper); background: var(--ink);
+      padding: 10px 22px; border-radius: 100px; text-decoration: none;
+      transition: transform .25s var(--ease), box-shadow .25s;
     }
-    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+    .nav-cta:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 rgba(13,13,12,.25); }
 
-    /* ── HERO ── */
+    /* ════════ HERO ════════ */
     #hero {
-      min-height: 100vh; padding: 140px 40px 100px;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; border-bottom: var(--border); overflow: hidden;
+      min-height: 100vh; position: relative; overflow: hidden;
+      padding: 156px 40px 90px;
+      display: flex; align-items: center;
+      border-bottom: 1px solid var(--ink);
     }
-    .hero-glow {
-      position: absolute; top: -100px; right: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(180,148,90,0.07) 0%, transparent 65%);
-      pointer-events: none;
+    .hero-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(13,13,12,.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 75% 70% at 78% 22%, black 0%, transparent 68%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 78% 22%, black 0%, transparent 68%);
     }
-    .hero-grid-lines {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(180,148,90,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(180,148,90,0.03) 1px, transparent 1px);
-      background-size: 60px 60px; pointer-events: none;
+    .hero-mark {
+      position: absolute; right: -120px; bottom: -80px; width: 620px; opacity: .05;
+      pointer-events: none; user-select: none; mix-blend-mode: multiply;
+      transform: rotate(-6deg);
     }
-    .hero-eyebrow {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; margin-bottom: 28px;
+    .hero-layout {
+      display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,.9fr);
+      gap: 72px; align-items: center; position: relative; z-index: 1;
     }
-    .hero-eyebrow::before {
-      content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold);
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+      border: 1px solid var(--ink); border-radius: 100px;
+      padding: 8px 18px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp .8s var(--ease) .1s forwards;
     }
+    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
     .hero-hed {
-      font-family: var(--body); font-size: clamp(44px, 6vw, 88px);
-      font-weight: 700; line-height: 1.0; letter-spacing: -0.03em;
-      color: var(--ink); margin-bottom: 32px;
-      position: relative; z-index: 1; text-align: center;
+      font-size: clamp(54px, 7.2vw, 108px); font-weight: 800;
+      line-height: .92; letter-spacing: -0.045em; text-transform: uppercase;
+      margin-bottom: 32px;
     }
-    .hero-hed em { font-style: italic; color: var(--gold); font-family: var(--display); }
-    .hero-hed .line3 { color: var(--ink-faint); font-size: 0.78em; display: block; }
-    .hero-rule {
-      border: none; border-top: 1px solid var(--gold-dim);
-      margin-bottom: 40px; position: relative; z-index: 1;
+    .hero-hed .row { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+    .hero-hed .row > span { display: block; transform: translateY(110%); animation: lineUp .9s var(--ease) forwards; }
+    .hero-hed .row:nth-child(1) > span { animation-delay: .15s; }
+    .hero-hed .row:nth-child(2) > span { animation-delay: .27s; }
+    .hero-hed .row:nth-child(3) > span { animation-delay: .39s; }
+    .hero-hed .boxed {
+      background: var(--ink); color: var(--paper);
+      display: inline-block; padding: 0 .12em; line-height: 1.02;
     }
-    .hero-bottom {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
-      position: relative; z-index: 1;
+    .hero-hed .ghost {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink-faint);
     }
     .hero-sub {
-      font-size: 16px; line-height: 1.75; color: var(--ink-dim); margin-bottom: 32px;
+      font-size: 18px; line-height: 1.6; color: var(--ink-dim);
+      max-width: 440px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp .8s var(--ease) .5s forwards;
     }
-    .hero-sub strong { color: var(--ink); font-weight: 600; }
+    .hero-sub strong { color: var(--ink); font-weight: 650; }
+    .hero-cta-row {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .8s var(--ease) .62s forwards;
+    }
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--gold); color: var(--bg);
-      padding: 14px 32px; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; transition: opacity .2s;
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      background: var(--ink); color: var(--paper);
+      padding: 17px 34px; border-radius: 100px; text-decoration: none;
+      transition: transform .25s var(--ease), box-shadow .25s;
     }
-    .btn-primary:hover { opacity: 0.85; }
-    .hero-guarantee {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
-      color: var(--ink-dim); margin-top: 14px;
+    .btn-primary .arrow { transition: transform .25s var(--ease); }
+    .btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 rgba(13,13,12,.22); }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+    .hero-note {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+      color: var(--ink-dim); display: flex; align-items: center; gap: 8px;
     }
-    .hero-guarantee i { color: var(--gold); font-size: 11px; }
-    .hero-right {
-      padding-left: 48px; border-left: 1px solid var(--gold-dim);
-      display: flex; flex-direction: column;
+    .hero-note::before { content: '✓'; color: var(--ink); font-weight: 600; }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .8s var(--ease) .74s forwards;
     }
-    .proof-item {
-      padding: 18px 0; border-bottom: 1px solid rgba(180,148,90,0.1);
-      display: flex; align-items: flex-start; gap: 16px;
+    .hstat .hstat-num {
+      font-weight: 800; font-size: 34px; letter-spacing: -.02em; line-height: 1;
+      color: var(--ink); margin-bottom: 6px;
     }
-    .proof-item:last-child { border-bottom: none; }
-    .proof-num {
-      font-family: var(--display); font-size: 36px; font-weight: 600;
-      color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 52px;
-    }
-    .proof-label { font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: 0.04em; }
-    .proof-desc { font-size: 12px; color: var(--ink-dim); line-height: 1.55; margin-top: 2px; }
+    .hstat .hstat-lab { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
 
-    /* ── CLIENTS TICKER ── */
-    #clients { border-bottom: var(--border); background: var(--bg-alt); }
-    .clients-label-row {
-      text-align: center; padding: 13px 0 11px;
-      font-family: var(--body); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.28em; text-transform: uppercase;
-      color: rgba(180,148,90,0.4);
-      border-bottom: 1px solid rgba(180,148,90,0.1);
+    /* ── live feed panel ── */
+    .feed-panel {
+      border: 1.5px solid var(--ink); border-radius: 18px;
+      background: #fdfcfa; overflow: hidden; position: relative;
+      box-shadow: var(--hard);
+      opacity: 0; animation: fadeUp 1s var(--ease) .55s forwards;
     }
-    .clients-ticker-row {
-      overflow: hidden; position: relative; padding: 16px 0;
-      max-width: 860px; margin: 0 auto;
+    .feed-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1.5px solid var(--ink);
     }
-    .clients-ticker-row::before,
-    .clients-ticker-row::after {
-      content: ''; position: absolute; top: 0; bottom: 0;
-      width: 100px; z-index: 2; pointer-events: none;
+    .feed-dots { display: flex; gap: 6px; }
+    .feed-dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); display: block; }
+    .feed-dots i:first-child { background: var(--ink); }
+    .feed-title { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); display: flex; align-items: center; gap: 8px; }
+    .feed-title .live { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
+    .feed-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 372px; }
+    .feed-item {
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 13px 16px; background: #fff;
+      display: flex; align-items: flex-start; gap: 12px;
     }
-    .clients-ticker-row::before { left: 0; background: linear-gradient(90deg, var(--bg-alt) 20%, transparent); }
-    .clients-ticker-row::after  { right: 0; background: linear-gradient(-90deg, var(--bg-alt) 20%, transparent); }
-    .clients-track {
-      display: flex; align-items: center; width: max-content;
-      animation: scroll-left 24s linear infinite;
-    }
-    .clients-track:hover { animation-play-state: paused; }
-    .client-logo {
+    .feed-item.enter { animation: feedIn .5s var(--ease); }
+    .feed-item.booked { background: var(--ink); border-color: var(--ink); }
+    .feed-ic {
+      width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      padding: 0 36px; flex-shrink: 0; opacity: 0.65; transition: opacity .3s;
+      font-size: 13px; border: 1px solid var(--line); color: var(--ink-dim);
     }
-    .client-logo:hover { opacity: 1; }
-    .client-logo img { height: 40px; width: auto; max-width: 130px; object-fit: contain; display: block; }
-    .client-divider { width: 1px; height: 28px; background: rgba(180,148,90,0.15); flex-shrink: 0; align-self: center; }
+    .feed-item.booked .feed-ic { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+    .feed-meta { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+    .feed-item.booked .feed-meta { color: rgba(246,244,239,.65); }
+    .feed-text { font-size: 13.5px; line-height: 1.45; color: var(--ink-dim); }
+    .feed-text strong { color: var(--ink); font-weight: 650; }
+    .feed-item.booked .feed-text { color: rgba(246,244,239,.75); }
+    .feed-item.booked .feed-text strong { color: var(--paper); }
+    .feed-foot {
+      border-top: 1.5px solid var(--ink); padding: 12px 20px;
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--ink-faint);
+      display: flex; justify-content: space-between;
+    }
 
-    /* ── PROBLEM ── */
-    #problem { padding: 96px 40px; border-bottom: var(--border); background: var(--bg-alt); }
-    .problem-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: start;
+    /* ════════ MARQUEE ════════ */
+    .marquee {
+      background: var(--ink); overflow: hidden; padding: 18px 0; position: relative;
     }
-    .problem-left { position: sticky; top: 80px; }
+    .marquee-track {
+      display: flex; width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .mq-item {
+      font-family: var(--mono); font-size: 12px; font-weight: 500;
+      letter-spacing: .26em; text-transform: uppercase;
+      color: rgba(246,244,239,.7); white-space: nowrap; padding: 0 28px;
+      display: flex; align-items: center; gap: 56px;
+    }
+    .mq-item b { color: var(--white); font-weight: 500; }
+
+    /* ════════ CLIENTS ════════ */
+    #clients { padding: 56px 40px; border-bottom: 1px solid var(--ink); }
+    .clients-row { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 28px; }
+    .clients-head { text-align: center; }
+    .client-chip {
+      background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 26px;
+      display: flex; align-items: center; justify-content: center;
+      filter: grayscale(1); opacity: .65;
+      transition: filter .35s, opacity .35s, transform .35s var(--ease), box-shadow .35s;
+    }
+    .client-chip:hover { filter: grayscale(0); opacity: 1; transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--ink); }
+    .client-chip img { height: 38px; width: auto; max-width: 132px; object-fit: contain; display: block; }
+
+    /* ════════ PROBLEM / SHIFT ════════ */
+    #problem { padding: 110px 40px; border-bottom: 1px solid var(--ink); position: relative; overflow: hidden; }
+    .problem-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; }
     .problem-hed {
-      font-family: var(--display); font-size: clamp(38px, 4.5vw, 62px);
-      font-weight: 600; line-height: 1.04; letter-spacing: -0.02em;
-      color: var(--ink); margin-bottom: 24px;
+      font-size: clamp(40px, 4.8vw, 66px); font-weight: 780;
+      line-height: .97; letter-spacing: -.035em; margin-bottom: 36px;
     }
-    .problem-hed em { font-style: italic; color: var(--gold); }
-    .problem-pull {
-      font-family: var(--display); font-size: 18px; font-style: italic;
-      color: var(--ink-dim); line-height: 1.6;
-      border-left: 2px solid var(--gold-dim); padding-left: 20px; margin-top: 8px;
+    .pain-list { display: flex; flex-direction: column; gap: 16px; }
+    .pain {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 16px; font-weight: 550; color: var(--ink-dim);
     }
-    .prob-cards { display: flex; flex-direction: column; }
-    .prob-card {
-      padding: 28px 0; border-top: 1px solid rgba(180,148,90,0.12);
-      transition: padding-left .25s cubic-bezier(.16,1,.3,1); cursor: default;
+    .pain .x {
+      width: 26px; height: 26px; flex-shrink: 0; border-radius: 8px;
+      border: 1.5px solid var(--ink); color: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
     }
-    .prob-card:last-child { border-bottom: 1px solid rgba(180,148,90,0.12); }
-    .prob-card:hover { padding-left: 12px; }
-    .prob-card-num {
-      font-family: var(--display); font-size: 13px; color: var(--gold);
-      opacity: 0.6; letter-spacing: 0.12em; margin-bottom: 10px;
-    }
-    .prob-card-title {
-      font-family: var(--display); font-size: 22px; font-weight: 600;
-      color: var(--ink); margin-bottom: 8px; line-height: 1.2;
-    }
-    .prob-card-body { font-size: 13px; color: var(--ink-dim); line-height: 1.7; }
+    .pain s { text-decoration-thickness: 1.5px; }
 
-    /* ── HOW IT WORKS ── */
-    #how-it-works { padding: 96px 40px; border-bottom: var(--border); background: var(--bg-mid); }
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); border: var(--border);
+    /* before / after calendars */
+    .cal-compare {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 22px; align-items: center;
     }
-    .step-cell {
-      padding: 44px 36px; border-right: var(--border);
+    .cal-card {
+      border: 1.5px solid var(--ink); border-radius: 16px;
+      background: #fdfcfa; overflow: hidden;
+    }
+    .cal-card.before { transform: rotate(-1.6deg); border-color: var(--ink-faint); opacity: .85; }
+    .cal-card.after { box-shadow: var(--hard); }
+    .cal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-bottom: 1.5px solid var(--ink);
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .cal-card.before .cal-head { border-color: var(--ink-faint); color: var(--ink-faint); }
+    .cal-head .tag { background: var(--ink); color: var(--paper); padding: 3px 9px; border-radius: 100px; font-weight: 600; }
+    .cal-card.before .cal-head .tag { background: transparent; color: var(--ink-faint); border: 1px solid var(--ink-faint); }
+    .cal-body { padding: 14px 16px 16px; }
+    .cal-days {
+      display: grid; grid-template-columns: repeat(5,1fr); gap: 6px;
+      font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
+      color: var(--ink-faint); text-align: center; margin-bottom: 8px;
+    }
+    .cal-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; }
+    .slot {
+      aspect-ratio: 1 / .66; border: 1px dashed var(--line); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 9px; color: var(--ink-faint);
+    }
+    .slot.dead::after { content: '—'; }
+    .slot.booked {
+      border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+      transform: scale(0);
+      transition: transform .45s var(--ease);
+      transition-delay: calc(var(--i) * .1s + .3s);
+    }
+    .slot.booked::after { content: 'MEETING'; letter-spacing: .05em; font-size: 8px; font-weight: 600; }
+    .visible .slot.booked { transform: scale(1); }
+    .cal-card.before .slot.booked {
+      background: transparent; border: 1px solid var(--ink-faint); color: var(--ink-faint);
+      transform: none; transition: none;
+    }
+    .cal-card.before .slot.booked::after { content: 'MEETING'; font-size: 8px; letter-spacing: .05em; font-weight: 400; }
+    .cal-arrow {
+      font-size: 30px; font-weight: 800; color: var(--ink);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .cal-arrow .mono-label { font-size: 9px; }
+
+    /* ════════ PROCESS (dark) ════════ */
+    #process { padding: 110px 40px; background: var(--black); color: var(--white); position: relative; overflow: hidden; }
+    #process .section-hed { color: var(--white); margin-bottom: 64px; }
+    #process::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(246,244,239,.07) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(ellipse 60% 60% at 15% 0%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 15% 0%, black 0%, transparent 70%);
+    }
+    .steps-grid { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; position: relative; align-items: stretch; }
+    .step-card {
+      border: 1px solid var(--wline); border-radius: 18px;
+      background: var(--black-card); padding: 36px 30px 32px;
       position: relative; overflow: hidden;
+      transition: transform .35s var(--ease), border-color .35s;
     }
-    .step-cell:last-child { border-right: none; }
+    .step-card:hover { transform: translateY(-6px); border-color: rgba(246,244,239,.45); }
     .step-ghost {
-      position: absolute; top: 8px; right: 16px;
-      font-family: var(--display); font-size: 100px; font-weight: 600;
-      color: rgba(180,148,90,0.45); line-height: 1;
-      pointer-events: none; user-select: none; letter-spacing: -0.03em;
+      position: absolute; top: -24px; right: 8px;
+      font-size: 130px; font-weight: 800; line-height: 1; letter-spacing: -.05em;
+      color: transparent; -webkit-text-stroke: 1px rgba(246,244,239,.22);
+      pointer-events: none; user-select: none;
     }
     .step-icon {
-      width: 44px; height: 44px; border: 1px solid var(--gold-dim);
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--white); color: var(--ink);
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; color: var(--gold); margin-bottom: 24px;
+      font-size: 20px; margin-bottom: 56px;
     }
-    .step-title {
-      font-family: var(--display); font-size: 22px; font-weight: 600;
-      color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 12px;
+    .step-title { font-size: 23px; font-weight: 720; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 10px; color: var(--white); }
+    .step-body { font-size: 14px; line-height: 1.6; color: var(--white-dim); }
+    .step-card .bar {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+      background: var(--white); transform: scaleX(0); transform-origin: left;
+      transition: transform .5s var(--ease);
     }
-    .step-body { font-size: 13px; line-height: 1.72; color: var(--ink-dim); }
+    .step-card:hover .bar { transform: scaleX(1); }
+    .step-link {
+      align-self: center; font-size: 26px; font-weight: 800; color: var(--white-faint);
+    }
 
-    /* ── OFFER ── */
-    #offer { padding: 96px 40px; border-bottom: var(--border); background: var(--bg); }
-    .offer-panels { display: grid; grid-template-columns: 1fr 1fr; border: var(--border); }
-    .offer-left { padding: 52px 48px; border-right: var(--border); }
-    .offer-panel-hed {
-      font-family: var(--display); font-size: 26px; font-weight: 600;
-      color: var(--ink); margin-bottom: 32px; letter-spacing: -0.01em;
+    /* ════════ OFFER ════════ */
+    #offer { padding: 110px 40px; border-bottom: 1px solid var(--ink); }
+    .offer-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; }
+    .offer-card {
+      border: 1.5px solid var(--ink); border-radius: 18px;
+      background: #fdfcfa; padding: 44px 42px;
     }
-    .checklist { display: flex; flex-direction: column; gap: 20px; }
-    .c-item { display: flex; align-items: flex-start; gap: 14px; }
+    .offer-card-hed { font-size: 22px; font-weight: 750; letter-spacing: -.02em; margin-bottom: 30px; }
+    .checklist { display: flex; flex-direction: column; gap: 0; }
+    .c-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 0; border-top: 1px solid var(--line);
+    }
+    .c-item:last-child { border-bottom: 1px solid var(--line); }
     .c-icon {
-      width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
-      border: 1px solid var(--gold-dim);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; color: var(--gold);
+      width: 26px; height: 26px; flex-shrink: 0;
+      background: var(--ink); color: var(--paper);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
     }
-    .c-title { font-size: 13px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
-    .c-desc { font-size: 12px; color: var(--ink-dim); display: block; line-height: 1.6; }
-    .offer-right {
-      padding: 52px 48px; display: flex; flex-direction: column;
-      background: rgba(180,148,90,0.02);
+    .c-title { font-size: 16px; font-weight: 680; letter-spacing: -.01em; flex: 1; }
+    .c-desc { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); text-align: right; }
+    .offer-ppm {
+      background: var(--black); color: var(--white);
+      border: 1.5px solid var(--ink); border-radius: 18px;
+      padding: 44px 42px; display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+      box-shadow: var(--hard);
+    }
+    .offer-ppm::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(246,244,239,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse 70% 50% at 100% 0%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 50% at 100% 0%, black 0%, transparent 70%);
     }
     .ppm-badge {
-      display: inline-block; background: var(--gold); color: var(--bg);
-      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; padding: 6px 14px; margin-bottom: 20px;
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      background: var(--white); color: var(--ink);
+      padding: 7px 16px; border-radius: 100px; margin-bottom: 28px;
     }
-    .offer-right-hed {
-      font-family: var(--display); font-size: 26px; font-weight: 600;
-      color: var(--ink); margin-bottom: 16px; line-height: 1.15;
+    .ppm-big {
+      font-size: clamp(44px, 4vw, 58px); font-weight: 800;
+      letter-spacing: -.04em; line-height: .95; margin-bottom: 18px; color: var(--white);
     }
-    .offer-para { font-size: 14px; color: var(--ink-dim); line-height: 1.75; margin-bottom: 28px; }
+    .ppm-para { font-size: 15px; color: var(--white-dim); line-height: 1.6; margin-bottom: 30px; position: relative; }
     .btn-outline {
-      display: block; text-align: center; border: 1px solid var(--gold-dim);
-      color: var(--gold); padding: 14px 32px; font-size: 11px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
-      transition: background .2s, color .2s;
+      display: block; text-align: center;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      border: 1px solid var(--white); color: var(--white);
+      padding: 16px 32px; border-radius: 100px; text-decoration: none;
+      transition: background .25s, color .25s;
+      position: relative;
     }
-    .btn-outline:hover { background: var(--gold); color: var(--bg); }
-    .guarantee-block { margin-top: auto; padding-top: 28px; border-top: 1px solid rgba(180,148,90,0.15); }
-    .guarantee-hed {
-      font-family: var(--display); font-size: 20px; font-weight: 600;
-      color: var(--gold); display: flex; align-items: center;
-      gap: 10px; margin-bottom: 10px;
-    }
-    .guarantee-hed i { font-size: 14px; }
-    .guarantee-para { font-size: 12px; color: var(--ink-dim); line-height: 1.65; }
+    .btn-outline:hover { background: var(--white); color: var(--ink); }
 
-    /* ── FAQ ── */
-    #faq { padding: 96px 40px; border-bottom: var(--border); background: var(--bg-mid); }
-    .faq-list { max-width: 740px; }
-    .faq-item { border-top: 1px solid rgba(180,148,90,0.12); }
-    .faq-item:last-child { border-bottom: 1px solid rgba(180,148,90,0.12); }
+    /* ════════ FAQ ════════ */
+    #faq { padding: 110px 40px; border-bottom: 1px solid var(--ink); background: var(--paper-dim); }
+    .faq-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 90px; align-items: start; }
+    .faq-left { position: sticky; top: 110px; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-top: 1px solid var(--ink); }
+    .faq-item:last-child { border-bottom: 1px solid var(--ink); }
     .faq-q {
-      width: 100%; background: none; border: none;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 24px 0; cursor: pointer; text-align: left; gap: 16px;
+      width: 100%; background: none; border: none; font-family: var(--display);
+      display: flex; align-items: center; gap: 20px;
+      padding: 26px 0; cursor: pointer; text-align: left; color: var(--ink);
     }
-    .faq-q-text {
-      font-family: var(--display); font-size: 20px; font-weight: 600;
-      color: var(--ink); line-height: 1.25; letter-spacing: -0.01em;
-    }
+    .faq-num { font-family: var(--mono); font-size: 11px; color: var(--ink); letter-spacing: .1em; flex-shrink: 0; width: 28px; }
+    .faq-q-text { font-size: 19px; font-weight: 680; line-height: 1.25; letter-spacing: -.015em; flex: 1; }
     .faq-icon {
-      width: 28px; height: 28px; flex-shrink: 0;
-      border: 1px solid var(--gold-dim);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--gold);
-      transition: transform .25s, background .2s, color .2s;
+      width: 30px; height: 30px; flex-shrink: 0; border-radius: 9px;
+      border: 1.5px solid var(--ink); position: relative;
+      transition: transform .3s var(--ease), background .25s;
     }
-    .faq-item.open .faq-icon { background: var(--gold); color: var(--bg); transform: rotate(45deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-answer { max-height: 320px; }
-    .faq-answer-inner {
-      padding-bottom: 24px; font-size: 14px; line-height: 1.78;
-      color: var(--ink-dim); max-width: 600px;
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute; background: var(--ink);
+      top: 50%; left: 50%; transition: background .25s;
     }
+    .faq-icon::before { width: 12px; height: 1.5px; transform: translate(-50%,-50%); }
+    .faq-icon::after { width: 1.5px; height: 12px; transform: translate(-50%,-50%); }
+    .faq-item.open .faq-icon { background: var(--ink); transform: rotate(135deg); }
+    .faq-item.open .faq-icon::before, .faq-item.open .faq-icon::after { background: var(--paper); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+    .faq-answer-inner { padding: 0 0 26px 48px; font-size: 15px; line-height: 1.7; color: var(--ink-dim); max-width: 540px; }
 
-    /* ── BOOK A CALL ── */
-    #book { padding: 96px 40px 120px; border-bottom: var(--border); background: var(--bg); }
-    .book-grid {
-      display: grid; grid-template-columns: 1fr 2fr;
-      gap: 80px; align-items: start;
+    /* ════════ BOOK ════════ */
+    #book { padding: 110px 40px 120px; position: relative; overflow: hidden; }
+    #book::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(13,13,12,.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 55% 60% at 5% 100%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 55% 60% at 5% 100%, black 0%, transparent 70%);
     }
-    .book-left { position: sticky; top: 80px; }
+    .book-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; position: relative; }
+    .book-left { position: sticky; top: 110px; }
     .book-hed {
-      font-family: var(--display); font-size: clamp(38px, 4.5vw, 62px);
-      font-weight: 600; line-height: 1.02; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 16px;
+      font-size: clamp(42px, 5vw, 72px); font-weight: 800;
+      line-height: .94; letter-spacing: -.04em; margin-bottom: 22px; text-transform: uppercase;
     }
-    .book-hed em { font-style: italic; color: var(--gold); }
-    .book-sub { font-size: 14px; color: var(--ink-dim); line-height: 1.75; margin-bottom: 32px; }
-    .book-meta { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
-    .b-meta { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; color: var(--ink-dim); }
-    .b-meta i { color: var(--gold); font-size: 11px; width: 14px; }
-    .book-right { border: var(--border); overflow: hidden; min-height: 700px; }
+    .book-sub { font-size: 16px; color: var(--ink-dim); line-height: 1.6; margin-bottom: 36px; max-width: 360px; }
+    .book-meta { display: flex; flex-direction: column; gap: 16px; }
+    .b-meta { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--ink-dim); }
+    .b-meta .bullet { width: 22px; height: 22px; border-radius: 7px; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .book-right {
+      border: 1.5px solid var(--ink); border-radius: 18px; overflow: hidden;
+      min-height: 700px; background: #fff;
+      box-shadow: var(--hard);
+    }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: var(--border); padding: 28px 40px;
+    /* ════════ FOOTER ════════ */
+    footer { padding: 64px 40px 36px; background: var(--black); color: var(--white); position: relative; overflow: hidden; }
+    .footer-top {
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px; background: var(--bg-alt);
+      flex-wrap: wrap; gap: 28px; margin-bottom: 64px;
     }
-    .footer-logo {
-      font-family: var(--display); font-size: 18px; font-weight: 600;
-      color: var(--ink); letter-spacing: 0.02em;
-    }
-    .footer-logo span { color: var(--gold); font-style: italic; }
-    .footer-copy {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 11px; color: rgba(240,235,225,0.28); letter-spacing: 0.06em;
-    }
-    .footer-copy a {
-      color: rgba(180,148,90,0.55); font-size: 14px;
-      text-decoration: none; transition: color .2s;
-    }
-    .footer-copy a:hover { color: var(--gold); }
-    .footer-links { display: flex; gap: 24px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { height: 34px; width: auto; display: block; filter: invert(1); mix-blend-mode: screen; }
+    .footer-brand .name { font-weight: 750; font-size: 18px; letter-spacing: -.02em; color: var(--white); }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
     .footer-links a {
-      font-size: 12px; font-weight: 500; color: var(--ink-dim);
+      font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--white-dim);
       text-decoration: none; transition: color .2s;
     }
-    .footer-links a:hover { color: var(--gold); }
+    .footer-links a:hover { color: var(--white); }
+    .footer-word {
+      font-size: clamp(64px, 12.5vw, 200px); font-weight: 800;
+      letter-spacing: -.04em; line-height: .8; text-transform: uppercase;
+      text-align: center; color: transparent;
+      -webkit-text-stroke: 1px rgba(246,244,239,.22);
+      user-select: none; pointer-events: none;
+      margin-bottom: 44px; white-space: nowrap;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--wline); padding-top: 26px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .footer-copy { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--white-faint); }
+    .footer-social a {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--white-dim); text-decoration: none; transition: color .2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .footer-social a:hover { color: var(--white); }
 
-    /* ── RESPONSIVE ── */
+    /* ════════ RESPONSIVE ════════ */
+    @media (max-width: 1020px) {
+      .hero-layout { grid-template-columns: 1fr; gap: 56px; }
+      .feed-panel { max-width: 560px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 56px; }
+    }
     @media (max-width: 900px) {
-      nav#main-nav { padding: 0 20px; }
+      nav#main-nav { padding: 0 22px; }
       .nav-link { display: none; }
-      #hero { padding: 120px 24px 80px; }
-      .hero-bottom { grid-template-columns: 1fr; gap: 40px; }
-      .hero-right { padding-left: 0; border-left: none; border-top: 1px solid var(--gold-dim); padding-top: 32px; }
-      #problem { padding: 72px 24px; }
-      .problem-grid { grid-template-columns: 1fr; gap: 48px; }
-      .problem-left { position: static; }
-      #how-it-works { padding: 72px 24px; }
+      #hero { padding: 130px 24px 70px; }
+      #clients, #problem, #process, #offer, #faq { padding-left: 24px; padding-right: 24px; }
+      #problem, #process, #offer, #faq { padding-top: 76px; padding-bottom: 76px; }
+      .faq-grid, .book-grid { grid-template-columns: 1fr; gap: 52px; }
+      .faq-left, .book-left { position: static; }
       .steps-grid { grid-template-columns: 1fr; }
-      .step-cell { border-right: none; border-bottom: var(--border); }
-      .step-cell:last-child { border-bottom: none; }
-      #offer { padding: 72px 24px; }
-      .offer-panels { grid-template-columns: 1fr; }
-      .offer-left { border-right: none; border-bottom: var(--border); }
-      #faq { padding: 72px 24px; }
-      #book { padding: 72px 24px 80px; }
-      .book-grid { grid-template-columns: 1fr; }
-      .book-left { position: static; }
-      .book-right { min-height: 550px; }
-      footer { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 24px; }
+      .step-link { transform: rotate(90deg); padding: 4px 0; }
+      .offer-grid { grid-template-columns: 1fr; }
+      #book { padding: 76px 24px 90px; }
+      .book-right { min-height: 560px; }
+      footer { padding: 52px 24px 30px; }
+      .faq-answer-inner { padding-left: 0; }
+      .hero-mark { width: 420px; right: -100px; }
+      .cal-compare { grid-template-columns: 1fr; }
+      .cal-arrow { transform: rotate(90deg); margin: 0 auto; }
     }
     @media (max-width: 600px) {
-      .hero-hed { font-size: clamp(36px, 10vw, 54px); }
-      .offer-left, .offer-right { padding: 36px 24px; }
+      .hero-hed { font-size: clamp(42px, 12vw, 60px); }
+      .offer-card, .offer-ppm { padding: 34px 24px; }
+      .hero-stats { gap: 28px; }
+      .clients-row { gap: 16px; }
+      .feed-panel, .offer-ppm, .book-right, .cal-card.after { box-shadow: 5px 5px 0 var(--ink); }
+      .c-desc { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .hero-hed .row > span { transform: none; }
+      .hero-badge, .hero-sub, .hero-cta-row, .hero-stats, .feed-panel { opacity: 1; }
+      .slot.booked { transform: scale(1); }
     }
   </style>
 </head>
@@ -438,10 +592,11 @@
   <!-- NAV -->
   <nav id="main-nav">
     <a class="nav-logo" href="#">
-      <span class="nav-logo-main">AcroGrowth</span>
+      <img src="logo.png" alt="AcroGrowth logo">
+      <span class="nav-logo-text">AcroGrowth</span>
     </a>
     <div class="nav-right">
-      <a class="nav-link" href="#how-it-works">Process</a>
+      <a class="nav-link" href="#process">Process</a>
       <a class="nav-link" href="#offer">Offer</a>
       <a class="nav-link" href="#faq">FAQ</a>
       <a class="nav-cta" href="#book">Book a Call</a>
@@ -450,138 +605,137 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-grid-lines"></div>
+    <div class="hero-dots"></div>
+    <img class="hero-mark" src="logo.png" alt="" aria-hidden="true">
     <div class="inner">
-      <div class="hero-eyebrow fi fi-1">B2B Outbound · For Founders &amp; CEOs</div>
-      <h1 class="hero-hed fi fi-2">
-        10 Qualified<br>
-        <em>Meetings.</em>
-        <span class="line3">Every Month.</span>
-      </h1>
-      <hr class="hero-rule fi fi-3">
-      <div class="hero-bottom fi fi-4">
+      <div class="hero-layout">
         <div>
-          <p class="hero-sub">We run your entire cold email outreach machine — with LinkedIn as an optional add-on — so your calendar fills with decision-makers, not noise. <strong>You only pay per meeting delivered.</strong></p>
-          <a class="btn-primary" href="#book">Book a Discovery Call <i class="fa-solid fa-arrow-right"></i></a>
-          <div class="hero-guarantee">
-            <i class="fa-solid fa-shield-halved"></i>
-            Performance-based — you pay per meeting, not per month
+          <div class="hero-badge"><span class="dot"></span>B2B Outbound · Pay Per Meeting</div>
+          <h1 class="hero-hed">
+            <span class="row"><span>10 Qualified</span></span>
+            <span class="row"><span><span class="boxed">Meetings.</span></span></span>
+            <span class="row"><span class="ghost">Every Month.</span></span>
+          </h1>
+          <p class="hero-sub">Cold email outbound, run end to end. <strong>You only pay per meeting delivered.</strong></p>
+          <div class="hero-cta-row">
+            <a class="btn-primary" href="#book">Book a Discovery Call <span class="arrow">→</span></a>
+          </div>
+          <div class="hero-stats">
+            <div class="hstat">
+              <div class="hstat-num"><span id="count-meetings">0</span>+</div>
+              <div class="hstat-lab">Meetings / Month</div>
+            </div>
+            <div class="hstat">
+              <div class="hstat-num">$0</div>
+              <div class="hstat-lab">Retainer</div>
+            </div>
+            <div class="hstat">
+              <div class="hstat-num">100%</div>
+              <div class="hstat-lab">Done For You</div>
+            </div>
           </div>
         </div>
-        <div class="hero-right">
-          <div class="proof-item">
-            <div class="proof-num">10+</div>
-            <div>
-              <div class="proof-label">Meetings / Month</div>
-              <div class="proof-desc">Decision-makers pre-qualified to your ICP, booked directly to your calendar.</div>
-            </div>
+        <div class="feed-panel">
+          <div class="feed-head">
+            <div class="feed-dots"><i></i><i></i><i></i></div>
+            <div class="feed-title"><span class="live"></span>Outbound Engine</div>
           </div>
-          <div class="proof-item">
-            <div class="proof-num">PPM</div>
-            <div>
-              <div class="proof-label">Pay Per Meeting</div>
-              <div class="proof-desc">Our fee is tied to results. No meetings delivered means no charge.</div>
-            </div>
-          </div>
-          <div class="proof-item">
-            <div class="proof-num">DFY</div>
-            <div>
-              <div class="proof-label">Done For You</div>
-              <div class="proof-desc">Cold email outreach, copywriting, follow-ups — all executed by us.</div>
-            </div>
-          </div>
+          <div class="feed-body" id="feed-body"></div>
+          <div class="feed-foot"><span>The motion, illustrated</span><span>ACR-OS v2</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CLIENTS TICKER -->
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="mq-track">
+      <div class="mq-item"><span>Cold Email Outbound</span><b>✦</b><span>Pay Per Meeting</span><b>✦</b><span>ICP-Verified Lists</span><b>✦</b><span>Done For You</span><b>✦</b><span>Weekly Reporting</span><b>✦</b><span>Qualified Decision-Makers</span><b>✦</b></div>
+    </div>
+  </div>
+
+  <!-- CLIENTS -->
   <section id="clients">
-    <div class="clients-label-row">Trusted By</div>
-    <div class="clients-ticker-row">
-      <div class="clients-track">
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-divider"></div>
-        <div class="client-logo"><img src="inphlux.jpeg" alt="Inphlux"></div>
-        <div class="client-divider"></div>
+    <div class="inner clients-head reveal">
+      <div class="mono-label">Trusted By</div>
+      <div class="clients-row">
+        <div class="client-chip"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
+        <div class="client-chip"><img src="inphlux.jpeg" alt="Inphlux"></div>
+        <div class="client-chip"><img src="relaydemandlogo.jpeg" alt="RelayDemand"></div>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM -->
+  <!-- PROBLEM → SHIFT -->
   <section id="problem">
     <div class="inner">
       <div class="problem-grid">
-        <div class="problem-left reveal">
-          <div class="section-eyebrow">The Problem</div>
-          <h2 class="problem-hed">Your pipeline shouldn't be a <em>guessing game.</em></h2>
-          <p class="problem-pull">"Most B2B founders are doing everything right — and still staring at an empty pipeline. Here's why."</p>
+        <div class="reveal">
+          <div class="eyebrow">The Problem</div>
+          <h2 class="problem-hed">Your pipeline shouldn't be a <span class="hl-box">guessing game.</span></h2>
+          <div class="pain-list">
+            <div class="pain"><span class="x">✕</span> Cold outreach dies in the inbox</div>
+            <div class="pain"><span class="x">✕</span> Feast-or-famine pipeline every quarter</div>
+            <div class="pain"><span class="x">✕</span> No time to run outbound yourself</div>
+          </div>
         </div>
-        <div class="prob-cards">
-          <div class="prob-card reveal">
-            <div class="prob-card-num">01</div>
-            <div class="prob-card-title">Outreach Dies in the Inbox</div>
-            <p class="prob-card-body">Generic cold messages get ignored. Without a targeted ICP list and proven sequence, you're burning time to generate zero pipeline.</p>
+        <div class="cal-compare reveal d1">
+          <div class="cal-card before">
+            <div class="cal-head"><span>Your Month</span><span class="tag">Before</span></div>
+            <div class="cal-body">
+              <div class="cal-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span></div>
+              <div class="cal-grid">
+                <div class="slot"></div><div class="slot dead"></div><div class="slot"></div><div class="slot"></div><div class="slot dead"></div>
+                <div class="slot"></div><div class="slot"></div><div class="slot booked"></div><div class="slot"></div><div class="slot"></div>
+                <div class="slot dead"></div><div class="slot"></div><div class="slot"></div><div class="slot dead"></div><div class="slot"></div>
+              </div>
+            </div>
           </div>
-          <div class="prob-card reveal">
-            <div class="prob-card-num">02</div>
-            <div class="prob-card-title">Inconsistent Pipeline Every Quarter</div>
-            <p class="prob-card-body">You close deals, go heads-down on delivery, look up three months later to a dead pipeline. The feast-or-famine cycle isn't a growth strategy.</p>
-          </div>
-          <div class="prob-card reveal">
-            <div class="prob-card-num">03</div>
-            <div class="prob-card-title">No Time to Do It Yourself</div>
-            <p class="prob-card-body">List building, email copywriting, inbox warm-up, follow-up sequences — each one is a part-time job. Together, impossible while running a company.</p>
+          <div class="cal-arrow">→<span class="mono-label">ACRO</span></div>
+          <div class="cal-card after">
+            <div class="cal-head"><span>Your Month</span><span class="tag">After</span></div>
+            <div class="cal-body">
+              <div class="cal-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span></div>
+              <div class="cal-grid">
+                <div class="slot booked" style="--i:0"></div><div class="slot"></div><div class="slot booked" style="--i:1"></div><div class="slot booked" style="--i:2"></div><div class="slot"></div>
+                <div class="slot booked" style="--i:3"></div><div class="slot booked" style="--i:4"></div><div class="slot"></div><div class="slot booked" style="--i:5"></div><div class="slot booked" style="--i:6"></div>
+                <div class="slot"></div><div class="slot booked" style="--i:7"></div><div class="slot booked" style="--i:8"></div><div class="slot"></div><div class="slot booked" style="--i:9"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works">
+  <!-- PROCESS -->
+  <section id="process" class="dark">
     <div class="inner">
-      <div class="section-eyebrow reveal">The Process</div>
-      <h2 class="section-hed reveal">Three steps. One calendar <em>full.</em></h2>
-      <div class="steps-grid reveal">
-        <div class="step-cell">
+      <div class="eyebrow reveal">The Process</div>
+      <h2 class="section-hed reveal">Three steps. One calendar, <span class="hl-box">full.</span></h2>
+      <div class="steps-grid">
+        <div class="step-card reveal">
           <div class="step-ghost">1</div>
-          <div class="step-icon"><i class="fa-solid fa-crosshairs"></i></div>
-          <h3 class="step-title">We Build Your ICP Lead List</h3>
-          <p class="step-body">We identify your exact buyers — filtered by title, company size, industry, and intent signals — then build a verified, high-intent target list ready for outreach.</p>
+          <div class="step-icon">◎</div>
+          <h3 class="step-title">We build your list</h3>
+          <p class="step-body">Verified buyers, filtered by title, size, industry &amp; intent.</p>
+          <span class="bar"></span>
         </div>
-        <div class="step-cell">
+        <div class="step-link reveal">→</div>
+        <div class="step-card reveal d1">
           <div class="step-ghost">2</div>
-          <div class="step-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-          <h3 class="step-title">We Run Cold Email Outreach</h3>
-          <p class="step-body">We execute multi-touch cold email sequences — personalized first-touches, follow-ups, and reply handling from dedicated inboxes — with optional LinkedIn outreach layered on to warm interest.</p>
+          <div class="step-icon">✉</div>
+          <h3 class="step-title">We run the outreach</h3>
+          <p class="step-body">Personalized sequences, follow-ups &amp; replies — handled.</p>
+          <span class="bar"></span>
         </div>
-        <div class="step-cell">
+        <div class="step-link reveal d1">→</div>
+        <div class="step-card reveal d2">
           <div class="step-ghost">3</div>
-          <div class="step-icon"><i class="fa-solid fa-calendar-check"></i></div>
-          <h3 class="step-title">Meetings Land. You Pay Per One.</h3>
-          <p class="step-body">Qualified prospects book directly to your calendar. You pay per meeting delivered — nothing more. Our fee is a direct function of the results we produce.</p>
+          <div class="step-icon">✓</div>
+          <h3 class="step-title">Meetings land</h3>
+          <p class="step-body">Booked straight to your calendar. You pay per meeting.</p>
+          <span class="bar"></span>
         </div>
       </div>
     </div>
@@ -590,59 +744,39 @@
   <!-- OFFER -->
   <section id="offer">
     <div class="inner">
-      <div class="section-eyebrow reveal">The Offer</div>
-      <h2 class="section-hed reveal">Everything you need. <em>Nothing</em> you don't.</h2>
-      <div class="offer-panels reveal">
-        <div class="offer-left">
-          <h3 class="offer-panel-hed">What's Included</h3>
+      <div class="eyebrow reveal">The Offer</div>
+      <h2 class="section-hed reveal">Everything you need. <span class="hl-box">Nothing</span> you don't.</h2>
+      <div class="offer-grid">
+        <div class="offer-card reveal">
+          <h3 class="offer-card-hed">What's included</h3>
           <div class="checklist">
             <div class="c-item">
-              <div class="c-icon"><i class="fa-solid fa-check"></i></div>
-              <div>
-                <span class="c-title">Qualified Meetings, Delivered</span>
-                <span class="c-desc">Decision-makers who match your ICP, pre-qualified before they hit your calendar.</span>
-              </div>
+              <div class="c-icon">✓</div>
+              <span class="c-title">Qualified meetings</span>
+              <span class="c-desc">Pre-vetted vs your ICP</span>
             </div>
             <div class="c-item">
-              <div class="c-icon"><i class="fa-solid fa-check"></i></div>
-              <div>
-                <span class="c-title">Full Cold Email Outbound Campaign</span>
-                <span class="c-desc">Dedicated inboxes, A/B-tested copy, personalized sequences, and follow-ups — fully executed for you.</span>
-              </div>
+              <div class="c-icon">✓</div>
+              <span class="c-title">Full cold email campaigns</span>
+              <span class="c-desc">Copy · Inboxes · Follow-ups</span>
             </div>
             <div class="c-item">
-              <div class="c-icon"><i class="fa-solid fa-check"></i></div>
-              <div>
-                <span class="c-title">LinkedIn Outreach <span style="opacity:.6;font-weight:400">— Add-On</span></span>
-                <span class="c-desc">Optional layer: connection sequences and authority content on your profile to warm prospects alongside email.</span>
-              </div>
+              <div class="c-icon">✓</div>
+              <span class="c-title">Fresh ICP lead lists</span>
+              <span class="c-desc">Rebuilt monthly · Verified</span>
             </div>
             <div class="c-item">
-              <div class="c-icon"><i class="fa-solid fa-check"></i></div>
-              <div>
-                <span class="c-title">ICP Lead List, Built Fresh Each Month</span>
-                <span class="c-desc">Verified, high-intent leads built fresh each month. No recycled databases.</span>
-              </div>
-            </div>
-            <div class="c-item">
-              <div class="c-icon"><i class="fa-solid fa-check"></i></div>
-              <div>
-                <span class="c-title">Weekly Reporting</span>
-                <span class="c-desc">You see exactly what's running, what's working, and what's booked — no black boxes.</span>
-              </div>
+              <div class="c-icon">✓</div>
+              <span class="c-title">Weekly reporting</span>
+              <span class="c-desc">No black boxes</span>
             </div>
           </div>
         </div>
-        <div class="offer-right">
+        <div class="offer-ppm reveal d1">
           <span class="ppm-badge">Pay Per Meeting</span>
-          <h3 class="offer-right-hed">Only Pay When Meetings Land</h3>
-          <p class="offer-para">We run the entire cold email outreach operation — with LinkedIn as an optional add-on — and you only pay for the qualified meetings we actually deliver. Our pricing is tied directly to results.</p>
-          <p class="offer-para">Start with a discovery call. We'll assess your ICP, your current pipeline, and tell you honestly whether we're the right fit.</p>
+          <div class="ppm-big">$0 until<br>meetings land</div>
+          <p class="ppm-para">One fixed price per qualified meeting delivered. Nothing else.</p>
           <a class="btn-outline" href="#book">Book a Discovery Call</a>
-          <div class="guarantee-block">
-            <div class="guarantee-hed"><i class="fa-solid fa-shield-halved"></i> Performance-Based</div>
-            <p class="guarantee-para">No meetings delivered means no charge. Our incentives are completely aligned with yours from day one.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -651,64 +785,65 @@
   <!-- FAQ -->
   <section id="faq">
     <div class="inner">
-      <div class="section-eyebrow reveal">FAQ</div>
-      <h2 class="section-hed reveal">Fair questions. <em>Straight</em> answers.</h2>
-      <div class="faq-list">
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span class="faq-q-text">How does the pay-per-meeting model work?</span>
-            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner">We run your entire cold email outreach operation, and you pay a fixed price per qualified meeting we book onto your calendar. No meetings delivered in a given period means no charge for that period. It's a pure performance model — our incentives are completely aligned with yours.</div></div>
+      <div class="faq-grid">
+        <div class="faq-left reveal">
+          <div class="eyebrow">FAQ</div>
+          <h2 class="problem-hed">Fair questions. <span class="hl-box">Straight</span> answers.</h2>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span class="faq-q-text">What counts as a "qualified" meeting?</span>
-            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner">A qualified meeting is a booked call with a decision-maker — typically a founder, C-suite executive, or VP — at a company that matches your ICP criteria: industry, headcount, revenue range, and any other filters we agree on upfront. If a meeting doesn't meet those criteria, it doesn't count and you don't pay for it.</div></div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span class="faq-q-text">Do I have to do anything once we start?</span>
-            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner">Very little. We run the entire outreach operation — list building, copywriting, sending infrastructure, sequences, follow-ups. You'll spend roughly 30–60 minutes onboarding: sharing your ICP definition, approving messaging, and getting your sending domains set up. After that, your only job is to show up to the meetings we book.</div></div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span class="faq-q-text">How many meetings can we expect per month?</span>
-            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner">We target 10+ qualified meetings per month for most clients, though the actual number depends on your ICP, market size, and offer strength. We'll give you a realistic forecast after the discovery call — before any agreement is signed.</div></div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span class="faq-q-text">Do you still do LinkedIn outreach?</span>
-            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes — as an add-on. Cold email is our core channel, but we can layer LinkedIn on top: connection sequences plus authority content posted to your profile (typically 3–5×/week) to warm prospects before and during email outreach. It's optional, and we'll tell you on the discovery call whether it's worth adding for your ICP.</div></div>
+        <div class="faq-list reveal d1">
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-num">01</span>
+              <span class="faq-q-text">How does pay-per-meeting work?</span>
+              <span class="faq-icon"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">A fixed price per qualified meeting we book onto your calendar. No meetings in a given period, no charge for that period.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-num">02</span>
+              <span class="faq-q-text">What counts as a "qualified" meeting?</span>
+              <span class="faq-icon"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">A booked call with a decision-maker who matches the ICP criteria we agree on upfront. If it doesn't match, you don't pay.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-num">03</span>
+              <span class="faq-q-text">What do I have to do?</span>
+              <span class="faq-icon"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Around 30–60 minutes of onboarding. After that, your only job is showing up to the meetings.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-num">04</span>
+              <span class="faq-q-text">How many meetings can I expect?</span>
+              <span class="faq-icon"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">We target 10+ per month, depending on your ICP and market. You'll get a realistic forecast on the discovery call.</div></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BOOK A CALL -->
+  <!-- BOOK -->
   <section id="book">
     <div class="inner">
       <div class="book-grid">
         <div class="book-left reveal">
-          <div class="section-eyebrow">Book a Call</div>
-          <h2 class="book-hed">See if you <em>qualify.</em></h2>
-          <p class="book-sub">15 minutes. We'll look at your ICP, your current pipeline, and tell you honestly whether we can deliver qualified meetings for your business.</p>
+          <div class="eyebrow">Book a Call</div>
+          <h2 class="book-hed">See if you <span class="hl-box">qualify.</span></h2>
+          <p class="book-sub">15 minutes. We'll tell you honestly whether we can fill your calendar.</p>
           <div class="book-meta">
-            <div class="b-meta"><i class="fa-solid fa-clock"></i> 15-minute intro call</div>
-            <div class="b-meta"><i class="fa-solid fa-video"></i> Video or phone</div>
-            <div class="b-meta"><i class="fa-solid fa-shield-halved"></i> No commitment required</div>
+            <div class="b-meta"><span class="bullet">◷</span> 15-minute intro call</div>
+            <div class="b-meta"><span class="bullet">▸</span> Video or phone</div>
+            <div class="b-meta"><span class="bullet">◆</span> No commitment required</div>
           </div>
         </div>
-        <div class="book-right reveal">
-          <div class="calendly-inline-widget" data-url="https://calendly.com/leomanhal/new-meeting" style="min-width:320px;height:700px;"></div>
+        <div class="book-right reveal d1">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/leomanhal/new-meeting?background_color=ffffff&text_color=0d0d0c&primary_color=0d0d0c" style="min-width:320px;height:700px;"></div>
         </div>
       </div>
     </div>
@@ -716,24 +851,30 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Acro<span>Growth</span></div>
-    <div class="footer-copy">
-      © 2026 AcroGrowth. All rights reserved.
-      <a href="https://www.linkedin.com/company/acrogrowth/" target="_blank" rel="noopener" aria-label="AcroGrowth on LinkedIn">
-        <i class="fa-brands fa-linkedin"></i>
-      </a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo.png" alt="AcroGrowth logo">
+        <span class="name">AcroGrowth</span>
+      </div>
+      <div class="footer-links">
+        <a href="#process">Process</a>
+        <a href="#offer">Offer</a>
+        <a href="#faq">FAQ</a>
+        <a href="#book">Book a Call</a>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="#how-it-works">Process</a>
-      <a href="#offer">Offer</a>
-      <a href="#faq">FAQ</a>
-      <a href="#book">Book a Call</a>
+    <div class="footer-word">AcroGrowth</div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ACROGROWTH — ALL RIGHTS RESERVED</div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/acrogrowth/" target="_blank" rel="noopener" aria-label="AcroGrowth on LinkedIn">LinkedIn ↗</a>
+      </div>
     </div>
   </footer>
 
   <script async src="https://assets.calendly.com/assets/external/widget.js"></script>
   <script>
-    // Scroll reveal
+    // ── Scroll reveal ──
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -741,18 +882,65 @@
           revealObserver.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // FAQ accordion
+    // ── FAQ accordion ──
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0px';
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        const ans = item.querySelector('.faq-answer');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
     }
 
-    // Calendly init
+    // ── Hero counter ──
+    const counterEl = document.getElementById('count-meetings');
+    let counted = false;
+    function runCounter() {
+      if (counted) return; counted = true;
+      const target = 10, dur = 1200, t0 = performance.now();
+      (function tick(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        counterEl.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+    setTimeout(runCounter, 800);
+
+    // ── Live feed simulation ──
+    const feedEvents = [
+      { type: 'sent',   meta: 'SEQUENCE · TOUCH 1',  text: 'Personalized opener sent to <strong>VP of Sales</strong> · SaaS, 120 ppl' },
+      { type: 'reply',  meta: 'REPLY · 09:42',        text: '"<strong>Interested</strong> — send over some times for next week."' },
+      { type: 'booked', meta: 'MEETING BOOKED',       text: '<strong>Tue 2:00 PM</strong> — Director of Ops · Logistics' },
+      { type: 'sent',   meta: 'SEQUENCE · FOLLOW-UP', text: 'Follow-up #2 queued for <strong>Head of Growth</strong> · Fintech' },
+      { type: 'reply',  meta: 'REPLY · 11:17',        text: '"This is timely — <strong>who else</strong> have you done this for?"' },
+      { type: 'booked', meta: 'MEETING BOOKED',       text: '<strong>Thu 10:30 AM</strong> — Founder · B2B Services' },
+      { type: 'sent',   meta: 'LIST · VERIFIED',      text: '<strong>ICP batch refreshed</strong> — titles, size & intent checked' },
+      { type: 'reply',  meta: 'REPLY · 15:03',        text: '"Saw your note — <strong>let\'s talk.</strong> Friday work?"' },
+      { type: 'booked', meta: 'MEETING BOOKED',       text: '<strong>Fri 1:15 PM</strong> — CEO · Manufacturing tech' },
+    ];
+    const icons = { sent: '↗', reply: '✉', booked: '✓' };
+    const feedBody = document.getElementById('feed-body');
+    let feedIdx = 0;
+    function pushFeed(animate) {
+      const ev = feedEvents[feedIdx % feedEvents.length]; feedIdx++;
+      const el = document.createElement('div');
+      el.className = 'feed-item' + (ev.type === 'booked' ? ' booked' : '') + (animate ? ' enter' : '');
+      el.innerHTML = '<div class="feed-ic">' + icons[ev.type] + '</div><div><div class="feed-meta">' + ev.meta + '</div><div class="feed-text">' + ev.text + '</div></div>';
+      feedBody.prepend(el);
+      while (feedBody.children.length > 4) feedBody.removeChild(feedBody.lastChild);
+    }
+    for (let i = 0; i < 4; i++) pushFeed(false);
+    setInterval(() => pushFeed(true), 2600);
+
+    // ── Calendly init ──
     const calendlyInterval = setInterval(() => {
       if (window.Calendly) {
         Calendly.initInlineWidgets();
