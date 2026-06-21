@@ -253,17 +253,27 @@
     }
 
     /* ════════ CLIENTS ════════ */
-    #clients { padding: 56px 40px; border-bottom: 1px solid var(--ink); }
-    .clients-row { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 28px; }
-    .clients-head { text-align: center; }
-    .client-chip {
-      background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 26px;
+    #clients { padding: 40px 40px; border-bottom: 1px solid var(--ink); }
+    .clients-row {
       display: flex; align-items: center; justify-content: center;
-      filter: grayscale(1); opacity: .65;
+      gap: 26px; flex-wrap: wrap;
+    }
+    .clients-row::before, .clients-row::after {
+      content: ''; flex: 1 1 60px; min-width: 36px; height: 1px;
+      background: var(--line);
+    }
+    .clients-label {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--ink-faint); white-space: nowrap;
+    }
+    .client-chip {
+      background: var(--ink); border-radius: 12px; padding: 12px 22px;
+      display: flex; align-items: center; justify-content: center;
+      filter: grayscale(1); opacity: .9;
       transition: filter .35s, opacity .35s, transform .35s var(--ease), box-shadow .35s;
     }
-    .client-chip:hover { filter: grayscale(0); opacity: 1; transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--ink); }
-    .client-chip img { height: 38px; width: auto; max-width: 132px; object-fit: contain; display: block; }
+    .client-chip:hover { filter: grayscale(0); opacity: 1; transform: translateY(-3px); box-shadow: 0 8px 22px rgba(13,13,12,.22); }
+    .client-chip img { height: 30px; width: auto; max-width: 124px; object-fit: contain; display: block; }
 
     /* ════════ PROBLEM / SHIFT ════════ */
     #problem { padding: 110px 40px; border-bottom: 1px solid var(--ink); position: relative; overflow: hidden; }
@@ -632,9 +642,9 @@
 
   <!-- CLIENTS -->
   <section id="clients">
-    <div class="inner clients-head reveal">
-      <div class="mono-label">Trusted By</div>
+    <div class="inner reveal">
       <div class="clients-row">
+        <span class="clients-label">Trusted By</span>
         <div class="client-chip"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
         <div class="client-chip"><img src="inphlux.jpeg" alt="Inphlux"></div>
       </div>
