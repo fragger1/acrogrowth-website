@@ -66,7 +66,6 @@
     /* ════════ KEYFRAMES ════════ */
     @keyframes lineUp { from { transform: translateY(110%); } to { transform: translateY(0); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(13,13,12,.35); } 50% { opacity: .55; box-shadow: 0 0 0 5px rgba(13,13,12,0); } }
     @keyframes feedIn { from { opacity: 0; transform: translateY(-14px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
@@ -252,23 +251,6 @@
       text-transform: uppercase; color: var(--ink-faint);
       display: flex; justify-content: space-between;
     }
-
-    /* ════════ MARQUEE ════════ */
-    .marquee {
-      background: var(--ink); overflow: hidden; padding: 18px 0; position: relative;
-    }
-    .marquee-track {
-      display: flex; width: max-content;
-      animation: marquee 30s linear infinite;
-    }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    .mq-item {
-      font-family: var(--mono); font-size: 12px; font-weight: 500;
-      letter-spacing: .26em; text-transform: uppercase;
-      color: rgba(246,244,239,.7); white-space: nowrap; padding: 0 28px;
-      display: flex; align-items: center; gap: 56px;
-    }
-    .mq-item b { color: var(--white); font-weight: 500; }
 
     /* ════════ CLIENTS ════════ */
     #clients { padding: 56px 40px; border-bottom: 1px solid var(--ink); }
@@ -648,13 +630,6 @@
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="mq-track">
-      <div class="mq-item"><span>Cold Email Outbound</span><b>✦</b><span>Pay Per Meeting</span><b>✦</b><span>ICP-Verified Lists</span><b>✦</b><span>Done For You</span><b>✦</b><span>Weekly Reporting</span><b>✦</b><span>Qualified Decision-Makers</span><b>✦</b></div>
-    </div>
-  </div>
-
   <!-- CLIENTS -->
   <section id="clients">
     <div class="inner clients-head reveal">
@@ -874,12 +849,6 @@
 
   <script async src="https://assets.calendly.com/assets/external/widget.js"></script>
   <script>
-    // ── Marquee: duplicate content so the -50% loop is seamless ──
-    const mqTrack = document.getElementById('mq-track');
-    const mqItem = mqTrack.children[0];
-    const mqPerHalf = Math.max(1, Math.ceil(window.innerWidth / mqItem.offsetWidth) + 1);
-    for (let i = 1; i < mqPerHalf * 2; i++) mqTrack.appendChild(mqItem.cloneNode(true));
-
     // ── Scroll reveal ──
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
