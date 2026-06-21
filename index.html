@@ -252,29 +252,6 @@
       display: flex; justify-content: space-between;
     }
 
-    /* ════════ CLIENTS ════════ */
-    #clients { padding: 40px 40px; border-bottom: 1px solid var(--ink); }
-    .clients-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 26px; flex-wrap: wrap;
-    }
-    .clients-row::before, .clients-row::after {
-      content: ''; flex: 1 1 60px; min-width: 36px; height: 1px;
-      background: var(--line);
-    }
-    .clients-label {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--ink-faint); white-space: nowrap;
-    }
-    .client-chip {
-      background: var(--ink); border-radius: 12px; padding: 12px 22px;
-      display: flex; align-items: center; justify-content: center;
-      filter: grayscale(1); opacity: .9;
-      transition: filter .35s, opacity .35s, transform .35s var(--ease), box-shadow .35s;
-    }
-    .client-chip:hover { filter: grayscale(0); opacity: 1; transform: translateY(-3px); box-shadow: 0 8px 22px rgba(13,13,12,.22); }
-    .client-chip img { height: 30px; width: auto; max-width: 124px; object-fit: contain; display: block; }
-
     /* ════════ PROBLEM / SHIFT ════════ */
     #problem { padding: 110px 40px; border-bottom: 1px solid var(--ink); position: relative; overflow: hidden; }
     .problem-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; }
@@ -530,7 +507,7 @@
       nav#main-nav { padding: 0 22px; }
       .nav-link { display: none; }
       #hero { padding: 130px 24px 70px; }
-      #clients, #problem, #process, #effort, #faq { padding-left: 24px; padding-right: 24px; }
+      #problem, #process, #effort, #faq { padding-left: 24px; padding-right: 24px; }
       #problem, #process, #effort, #faq { padding-top: 76px; padding-bottom: 76px; }
       .faq-grid, .book-grid { grid-template-columns: 1fr; gap: 52px; }
       .faq-left, .book-left { position: static; }
@@ -549,7 +526,6 @@
       .hero-hed { font-size: clamp(42px, 12vw, 60px); }
       .effort-col { padding: 30px 22px; }
       .hero-stats { gap: 28px; }
-      .clients-row { gap: 16px; }
       .feed-panel, .effort-col.ours, .book-right, .cal-card.after { box-shadow: 5px 5px 0 var(--ink); }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -615,17 +591,6 @@
           <div class="feed-body" id="feed-body"></div>
           <div class="feed-foot"><span>The motion, illustrated</span><span>ACR-OS v2</span></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTS -->
-  <section id="clients">
-    <div class="inner reveal">
-      <div class="clients-row">
-        <span class="clients-label">Trusted By</span>
-        <div class="client-chip"><img src="getairpilot_logo.jpeg" alt="AirPilot"></div>
-        <div class="client-chip"><img src="inphlux.jpeg" alt="Inphlux"></div>
       </div>
     </div>
   </section>
