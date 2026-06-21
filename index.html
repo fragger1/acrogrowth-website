@@ -428,65 +428,6 @@
     .ours-grid .e-item { break-inside: avoid; }
     @media (max-width: 720px) { .ours-grid { columns: 1; } }
 
-    /* ════════ OFFER ════════ */
-    #offer { padding: 110px 40px; border-bottom: 1px solid var(--ink); }
-    .offer-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; }
-    .offer-card {
-      border: 1.5px solid var(--ink); border-radius: 18px;
-      background: #fdfcfa; padding: 44px 42px;
-    }
-    .offer-card-hed { font-size: 22px; font-weight: 750; letter-spacing: -.02em; margin-bottom: 30px; }
-    .checklist { display: flex; flex-direction: column; gap: 0; }
-    .c-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 18px 0; border-top: 1px solid var(--line);
-    }
-    .c-item:last-child { border-bottom: 1px solid var(--line); }
-    .c-icon {
-      width: 26px; height: 26px; flex-shrink: 0;
-      background: var(--ink); color: var(--paper);
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-    }
-    .c-title { font-size: 16px; font-weight: 680; letter-spacing: -.01em; flex: 1; }
-    .c-desc { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); text-align: right; }
-    .offer-ppm {
-      background: var(--black); color: var(--white);
-      border: 1.5px solid var(--ink); border-radius: 18px;
-      padding: 44px 42px; display: flex; flex-direction: column; justify-content: center;
-      position: relative; overflow: hidden;
-      box-shadow: var(--hard);
-    }
-    .offer-ppm::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image: radial-gradient(rgba(246,244,239,.08) 1px, transparent 1px);
-      background-size: 22px 22px;
-      mask-image: radial-gradient(ellipse 70% 50% at 100% 0%, black 0%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 50% at 100% 0%, black 0%, transparent 70%);
-    }
-    .ppm-badge {
-      display: inline-block; align-self: flex-start;
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
-      letter-spacing: .2em; text-transform: uppercase;
-      background: var(--white); color: var(--ink);
-      padding: 7px 16px; border-radius: 100px; margin-bottom: 28px;
-    }
-    .ppm-big {
-      font-size: clamp(44px, 4vw, 58px); font-weight: 800;
-      letter-spacing: -.04em; line-height: .95; margin-bottom: 18px; color: var(--white);
-    }
-    .ppm-para { font-size: 15px; color: var(--white-dim); line-height: 1.6; margin-bottom: 30px; position: relative; }
-    .btn-outline {
-      display: block; text-align: center;
-      font-family: var(--mono); font-size: 12px; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      border: 1px solid var(--white); color: var(--white);
-      padding: 16px 32px; border-radius: 100px; text-decoration: none;
-      transition: background .25s, color .25s;
-      position: relative;
-    }
-    .btn-outline:hover { background: var(--white); color: var(--ink); }
-
     /* ════════ FAQ ════════ */
     #faq { padding: 110px 40px; border-bottom: 1px solid var(--ink); background: var(--paper-dim); }
     .faq-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 90px; align-items: start; }
@@ -589,13 +530,13 @@
       nav#main-nav { padding: 0 22px; }
       .nav-link { display: none; }
       #hero { padding: 130px 24px 70px; }
-      #clients, #problem, #process, #offer, #faq { padding-left: 24px; padding-right: 24px; }
-      #problem, #process, #offer, #faq { padding-top: 76px; padding-bottom: 76px; }
+      #clients, #problem, #process, #effort, #faq { padding-left: 24px; padding-right: 24px; }
+      #problem, #process, #effort, #faq { padding-top: 76px; padding-bottom: 76px; }
       .faq-grid, .book-grid { grid-template-columns: 1fr; gap: 52px; }
       .faq-left, .book-left { position: static; }
       .steps-grid { grid-template-columns: 1fr; }
       .step-link { transform: rotate(90deg); padding: 4px 0; }
-      .offer-grid { grid-template-columns: 1fr; }
+      .effort-grid { grid-template-columns: 1fr; }
       #book { padding: 76px 24px 90px; }
       .book-right { min-height: 560px; }
       footer { padding: 52px 24px 30px; }
@@ -606,11 +547,10 @@
     }
     @media (max-width: 600px) {
       .hero-hed { font-size: clamp(42px, 12vw, 60px); }
-      .offer-card, .offer-ppm { padding: 34px 24px; }
+      .effort-col { padding: 30px 22px; }
       .hero-stats { gap: 28px; }
       .clients-row { gap: 16px; }
-      .feed-panel, .offer-ppm, .book-right, .cal-card.after { box-shadow: 5px 5px 0 var(--ink); }
-      .c-desc { display: none; }
+      .feed-panel, .effort-col.ours, .book-right, .cal-card.after { box-shadow: 5px 5px 0 var(--ink); }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -630,7 +570,6 @@
     </a>
     <div class="nav-right">
       <a class="nav-link" href="#process">Process</a>
-      <a class="nav-link" href="#offer">Offer</a>
       <a class="nav-link" href="#faq">FAQ</a>
       <a class="nav-cta" href="#book">Book a Call</a>
     </div>
@@ -801,47 +740,6 @@
     </div>
   </section>
 
-  <!-- OFFER -->
-  <section id="offer">
-    <div class="inner">
-      <div class="eyebrow reveal">The Offer</div>
-      <h2 class="section-hed reveal">Everything you need. <span class="hl-box">Nothing</span> you don't.</h2>
-      <div class="offer-grid">
-        <div class="offer-card reveal">
-          <h3 class="offer-card-hed">What's included</h3>
-          <div class="checklist">
-            <div class="c-item">
-              <div class="c-icon">✓</div>
-              <span class="c-title">Qualified meetings</span>
-              <span class="c-desc">Pre-vetted vs your ICP</span>
-            </div>
-            <div class="c-item">
-              <div class="c-icon">✓</div>
-              <span class="c-title">Full cold email campaigns</span>
-              <span class="c-desc">Copy · Inboxes · Follow-ups</span>
-            </div>
-            <div class="c-item">
-              <div class="c-icon">✓</div>
-              <span class="c-title">Fresh ICP lead lists</span>
-              <span class="c-desc">Rebuilt monthly · Verified</span>
-            </div>
-            <div class="c-item">
-              <div class="c-icon">✓</div>
-              <span class="c-title">Weekly reporting</span>
-              <span class="c-desc">No black boxes</span>
-            </div>
-          </div>
-        </div>
-        <div class="offer-ppm reveal d1">
-          <span class="ppm-badge">Pay Per Meeting</span>
-          <div class="ppm-big">$0 until<br>meetings land</div>
-          <p class="ppm-para">One fixed price per qualified meeting delivered. Nothing else.</p>
-          <a class="btn-outline" href="#book">Book a Discovery Call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section id="faq">
     <div class="inner">
@@ -918,7 +816,6 @@
       </div>
       <div class="footer-links">
         <a href="#process">Process</a>
-        <a href="#offer">Offer</a>
         <a href="#faq">FAQ</a>
         <a href="#book">Book a Call</a>
       </div>
