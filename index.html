@@ -388,6 +388,46 @@
       align-self: center; font-size: 26px; font-weight: 800; color: var(--white-faint);
     }
 
+    /* ════════ EFFORT SPLIT ════════ */
+    #effort { padding: 110px 40px; border-bottom: 1px solid var(--ink); }
+    .effort-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 20px; align-items: stretch; margin-top: 8px; }
+    .effort-col {
+      border: 1.5px solid var(--ink); border-radius: 18px; padding: 38px 34px;
+      display: flex; flex-direction: column;
+    }
+    .effort-col.yours { background: #fdfcfa; }
+    .effort-col.ours { background: var(--black); color: var(--white); box-shadow: var(--hard); position: relative; overflow: hidden; }
+    .effort-col.ours::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(246,244,239,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse 60% 60% at 90% 0%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 90% 0%, black 0%, transparent 70%);
+    }
+    .effort-tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--ink-faint); margin-bottom: 6px; position: relative;
+    }
+    .effort-col.ours .effort-tag { color: var(--white-faint); }
+    .effort-hed { font-size: 26px; font-weight: 780; letter-spacing: -.025em; margin-bottom: 28px; position: relative; }
+    .effort-list { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .e-item { display: flex; align-items: center; gap: 14px; padding: 15px 0; border-top: 1px solid var(--line); font-size: 15px; font-weight: 550; }
+    .e-item:last-child { border-bottom: 1px solid var(--line); }
+    .effort-col.ours .e-item { border-color: var(--wline); }
+    .e-mark {
+      width: 24px; height: 24px; flex-shrink: 0; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; font-family: var(--mono);
+      border: 1.5px solid var(--ink);
+    }
+    .effort-col.ours .e-mark { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .effort-foot { margin-top: auto; padding-top: 26px; position: relative; }
+    .effort-col.ours .effort-foot { font-size: 13px; color: var(--white-dim); line-height: 1.6; }
+    .effort-col.yours .effort-foot { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+    .ours-grid { columns: 2; column-gap: 32px; }
+    .ours-grid .e-item { break-inside: avoid; }
+    @media (max-width: 720px) { .ours-grid { columns: 1; } }
+
     /* ════════ OFFER ════════ */
     #offer { padding: 110px 40px; border-bottom: 1px solid var(--ink); }
     .offer-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; }
@@ -721,6 +761,41 @@
           <h3 class="step-title">Meetings land</h3>
           <p class="step-body">Booked straight to your calendar. You pay per meeting.</p>
           <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EFFORT SPLIT -->
+  <section id="effort">
+    <div class="inner">
+      <div class="eyebrow reveal">The Split</div>
+      <h2 class="section-hed reveal">You show up. <span class="hl-box">We do the rest.</span></h2>
+      <div class="effort-grid">
+        <div class="effort-col yours reveal">
+          <div class="effort-tag">Your side</div>
+          <div class="effort-hed">What you handle</div>
+          <div class="effort-list">
+            <div class="e-item"><span class="e-mark">1</span> A 30–60 min onboarding call</div>
+            <div class="e-item"><span class="e-mark">2</span> Approve your ICP &amp; messaging</div>
+            <div class="e-item"><span class="e-mark">3</span> Show up to the meetings</div>
+          </div>
+          <div class="effort-foot">That's it.</div>
+        </div>
+        <div class="effort-col ours reveal d1">
+          <div class="effort-tag">Our side</div>
+          <div class="effort-hed">What we handle</div>
+          <div class="effort-list ours-grid">
+            <div class="e-item"><span class="e-mark">✓</span> Email domains &amp; inboxes</div>
+            <div class="e-item"><span class="e-mark">✓</span> Inbox warm-up &amp; deliverability</div>
+            <div class="e-item"><span class="e-mark">✓</span> ICP lead lists, built monthly</div>
+            <div class="e-item"><span class="e-mark">✓</span> Copywriting &amp; A/B testing</div>
+            <div class="e-item"><span class="e-mark">✓</span> Multi-touch sending</div>
+            <div class="e-item"><span class="e-mark">✓</span> Follow-up sequences</div>
+            <div class="e-item"><span class="e-mark">✓</span> Reply handling &amp; booking</div>
+            <div class="e-item"><span class="e-mark">✓</span> Weekly reporting</div>
+          </div>
+          <div class="effort-foot">The entire outbound engine — run end to end, so your team stays on closing.</div>
         </div>
       </div>
     </div>
