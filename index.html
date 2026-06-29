@@ -209,6 +209,22 @@
     }
     .hstat .hstat-lab { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
 
+    /* ── VSL ── */
+    #vsl { padding: 90px 40px; }
+    .vsl-wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+    .vsl-frame {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      border: 1.5px solid var(--ink); border-radius: 18px;
+      background: var(--black); overflow: hidden;
+      box-shadow: var(--hard); margin-top: 36px;
+    }
+    .vsl-frame iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+    }
+    @media (max-width: 768px) {
+      #vsl { padding: 64px 24px; }
+    }
+
     /* ── live feed panel ── */
     .feed-panel {
       border: 1.5px solid var(--ink); border-radius: 18px;
@@ -591,6 +607,17 @@
           <div class="feed-body" id="feed-body"></div>
           <div class="feed-foot"><span>The motion, illustrated</span><span>ACR-OS v2</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VSL -->
+  <section id="vsl">
+    <div class="vsl-wrap">
+      <div class="eyebrow reveal" style="justify-content:center;">Watch First</div>
+      <h2 class="section-hed reveal" style="margin-bottom:0;">See exactly how the <span class="hl-box">engine runs.</span></h2>
+      <div class="vsl-frame reveal d1">
+        <iframe src="https://www.youtube.com/embed/u5VOdQaQRPA" title="AcroGrowth — How It Works" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
